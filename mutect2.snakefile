@@ -7,6 +7,7 @@ rule all:
         expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
         expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
         expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
+        expand("results/{base_file_name}/mutect_merged.stats", base_file_name = config["base_file_name"]),
 
 rule mutect2:
     input:
@@ -37,3 +38,19 @@ rule mutect2:
         --f1r2-tar-gz {output.tar} \
         --panel-of-normals {params.panel_of_normals} \
         -output {output.vcf}) 2> {log}"
+
+rule MergeMutectStats:
+     output:
+        protected("results/{base_file_name}/mutect_merged.stats")
+     params:
+        gatk = config["gatk_path"]
+     log:
+        "logs/MergeMutectStats/{base_file_name}_merge_mutect_stats.txt"
+     shell:
+        """all_stat_inputs=`for chromosome in {wildcards.chromosomes}; do
+        printf -- "-stats results/{base_file_name}/unfiltered_$chromosome.vcf.gz.stats "; done`
+
+    ({params.gatk} MergeMutectStats \
+        $all_stat_inputs \
+        -O {output}) 2> {log}"""
+
