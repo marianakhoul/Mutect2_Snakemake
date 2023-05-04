@@ -80,7 +80,6 @@ rule LearnReadOrientationModel:
 		"logs/learn_read_orientation_model/{base_file_name}_learn_read_orientation_model.txt"
 	shell:
 		"({params.gatk} LearnReadOrientationModel \
-		#-I {input.chr1_tar} \
 		-I {input.chr2_tar} \
 		-I {input.chr3_tar} \
 		-I {input.chr4_tar} \
@@ -96,12 +95,10 @@ rule LearnReadOrientationModel:
 		-I {input.chr14_tar} \
 		-I {input.chr15_tar} \
 		-I {input.chr16_tar} \
-		#-I {input.chr17_tar} \
 		-I {input.chr18_tar} \
 		-I {input.chr19_tar} \
 		-I {input.chr20_tar} \
 		-I {input.chr21_tar} \
 		-I {input.chr22_tar} \
-		#-I {input.chrX_tar} \
 		-I {input.chrY_tar} \
 		-O {output}) 2> {log}"
