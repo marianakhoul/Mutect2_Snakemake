@@ -15,7 +15,7 @@ rule all:
 
 rule MergeMutectStats:
      output:
-        protected("results/{tumors}/mutect_merged.stats")
+        protected("results/MergeMutectStats/{tumors}/mutect_merged.stats")
      params:
         gatk = config["gatk_path"]
      log:
@@ -23,7 +23,7 @@ rule MergeMutectStats:
      shell:
         "
 	all_stat_inputs=`for chromosome in {chromosomes}; do
-        printf -- "-stats results/{tumors}/unfiltered_${chromosome}.vcf.gz.stats "; done`
+        printf -- "-stats results//{tumors}/unfiltered_${chromosome}.vcf.gz.stats "; done`
 
 	({params.gatk} MergeMutectStats \
         $all_stat_inputs \
