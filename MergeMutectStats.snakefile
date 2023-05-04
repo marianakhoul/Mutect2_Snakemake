@@ -52,7 +52,7 @@ rule LearnReadOrientationModel:
 		gatk = config["gatk_path"],
 		chromosomes=config["chromosomes"]
 	log:
-		"logs/LearnReadOrientationModel/{base_file_name}_learn_read_orientation_model.txt"
+		protected("logs/LearnReadOrientationModel/{base_file_name}_learn_read_orientation_model.txt")
 	shell:
 		"""
 		all_f1r2_inputs=`for chrom in {params.chromosomes}; do
