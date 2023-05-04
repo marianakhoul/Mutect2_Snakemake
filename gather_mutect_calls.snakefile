@@ -23,7 +23,7 @@ rule MergeMutectStats:
      shell:
         "
 	all_stat_inputs=`for chromosome in {chromosomes}; do
-        printf -- "-stats results//{tumors}/unfiltered_${chromosome}.vcf.gz.stats "; done`
+        printf -- "-stats results/{tumors}/unfiltered_${chromosome}.vcf.gz.stats "; done`
 
 	({params.gatk} MergeMutectStats \
         $all_stat_inputs \
