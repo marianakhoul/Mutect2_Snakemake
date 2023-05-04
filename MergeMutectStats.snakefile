@@ -18,8 +18,8 @@ rule MergeMutectStats:
 		"logs/MergeMutectStats/{base_file_name}_merge_mutect_stats.txt"
 	shell:
 		"""
-		all_stat_inputs=`for chromosome in CHRS; do
-		printf -- "-stats results/{wildcards.base_file_name}/unfiltered_{$chromosome}.vcf.gz.stats "; done`
+		all_stat_inputs=`for chrom in CHRS; do
+		printf -- "-stats results/{wildcards.base_file_name}/unfiltered_$chrom.vcf.gz.stats "; done`
 		
 		({params.gatk} MergeMutectStats \
 		$all_stat_inputs \
