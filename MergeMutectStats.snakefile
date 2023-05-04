@@ -8,7 +8,8 @@ rule all:
 	input:
 		expand("results/MergeMutectStats/{base_file_name}/mutect_merged.stats",base_file_name=config["base_file_name"]),
 		expand("results/GatherVcfs/{base_file_name}/gathered_unfiltered.vcf.gz",base_file_name=config["base_file_name"]),
-		expand("results/LearnReadOrientationModel/{base_file_name}/read_orientation_model.tar.gz", base_file_name = config["base_file_name"])
+		expand("results/LearnReadOrientationModel/{base_file_name}/read_orientation_model.tar.gz", base_file_name = config["base_file_name"]),
+		expand("results/GatherVcfs/{base_file_name}/gathered_unfiltered.vcf.gz.tbi", base_file_name = config["base_file_name"])
 
 rule MergeMutectStats:
 	output:
