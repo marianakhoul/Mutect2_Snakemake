@@ -15,15 +15,15 @@ rule all:
 
 rule MergeMutectStats:
      output:
-        protected("results/MergeMutectStats/{tumors}/mutect_merged.stats")
+        protected("results/MergeMutectStats/{base_file_name}/mutect_merged.stats")
      params:
         gatk = config["gatk_path"]
      log:
-        "logs/MergeMutectStats/{tumors}_merge_mutect_stats.txt"
+        "logs/MergeMutectStats/{base_file_name}_merge_mutect_stats.txt"
      shell:
         """
 	all_stat_inputs=`for chromosome in {chromosomes}; do
-        printf -- "-stats results/{tumors}/unfiltered_${chromosome}.vcf.gz.stats "; done`
+        printf -- "-stats results/{base_file_name}/unfiltered_${chromosome}.vcf.gz.stats "; done`
 
 	({params.gatk} MergeMutectStats \
         $all_stat_inputs \
