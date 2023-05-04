@@ -19,7 +19,7 @@ rule MergeMutectStats:
 	shell:
 		"""
 		all_stat_inputs=`for chromosome in CHRS; do
-		printf -- "-stats results/{base_file_name}/unfiltered_${chromosome}.vcf.gz.stats "; done`
+		printf -- "-stats results/{wildcards.base_file_name}/unfiltered_${chromosome}.vcf.gz.stats "; done`
 		
 		({params.gatk} MergeMutectStats \
 		$all_stat_inputs \
