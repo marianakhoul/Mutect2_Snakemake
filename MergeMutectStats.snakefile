@@ -5,11 +5,11 @@ configfile: "config/config.yaml"
 
 rule all:
     input:
-	expand("results/MergeMutectStats/{base_file_name}/mutect_merged.stats",base_file_name = config["base_file_name"])
+	expand("results/MergeMutectStats/{base_file_name}/mutect_merged.stats",base_file_name=config["base_file_name"])
 
 rule MergeMutectStats:
 	output:
-		protected("results/MergeMutectStats/{base_file_name}/mutect_merged.stats")
+		"results/MergeMutectStats/{base_file_name}/mutect_merged.stats"
 	params:
 		gatk = config["gatk_path"]
 	log:
