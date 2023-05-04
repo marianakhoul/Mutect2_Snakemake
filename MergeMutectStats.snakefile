@@ -56,8 +56,9 @@ rule LearnReadOrientationModel:
 	shell:
 		"""
 		all_f1r2_inputs=`for chrom in {params.chromosomes}; do
-		printf -- "-I results/{wildcards.base_file_name}/unfiltered_$chrom_f1r2.tar.gz \\ \\n"; done`
+		printf -- "results/{wildcards.base_file_name}/unfiltered_$chrom_f1r2.tar.gz \\n"; done`
+		echo $all_f1r2_inputs > f1r2.txt
 	
 		({params.gatk} LearnReadOrientationModel \
-		$all_f1r2_inputs \
+		-I f1r2.txt \
 		-O {output}) 2> {log}"""
