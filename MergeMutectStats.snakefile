@@ -48,7 +48,7 @@ rule GatherVcfs:
 
 rule LearnReadOrientationModel:
 	input:
-		chr1_tar = "results/{base_file_name}/unfiltered_chr1_f1r2.tar.gz",
+		#chr1_tar = "results/{base_file_name}/unfiltered_chr1_f1r2.tar.gz",
 		chr2_tar = "results/{base_file_name}/unfiltered_chr2_f1r2.tar.gz",
 		chr3_tar = "results/{base_file_name}/unfiltered_chr3_f1r2.tar.gz",
 		chr4_tar = "results/{base_file_name}/unfiltered_chr4_f1r2.tar.gz",
@@ -64,13 +64,13 @@ rule LearnReadOrientationModel:
 		chr14_tar = "results/{base_file_name}/unfiltered_chr14_f1r2.tar.gz",
 		chr15_tar = "results/{base_file_name}/unfiltered_chr15_f1r2.tar.gz",
 		chr16_tar = "results/{base_file_name}/unfiltered_chr16_f1r2.tar.gz",
-		chr17_tar = "results/{base_file_name}/unfiltered_chr17_f1r2.tar.gz",
+		#chr17_tar = "results/{base_file_name}/unfiltered_chr17_f1r2.tar.gz",
 		chr18_tar = "results/{base_file_name}/unfiltered_chr18_f1r2.tar.gz",
 		chr19_tar = "results/{base_file_name}/unfiltered_chr19_f1r2.tar.gz",
 		chr20_tar = "results/{base_file_name}/unfiltered_chr20_f1r2.tar.gz",
 		chr21_tar = "results/{base_file_name}/unfiltered_chr21_f1r2.tar.gz",
 		chr22_tar = "results/{base_file_name}/unfiltered_chr22_f1r2.tar.gz",
-		chrX_tar = "results/{base_file_name}/unfiltered_chrX_f1r2.tar.gz",
+		#chrX_tar = "results/{base_file_name}/unfiltered_chrX_f1r2.tar.gz",
 		chrY_tar = "results/{base_file_name}/unfiltered_chrY_f1r2.tar.gz"
 	output:
 		"results/LearnReadOrientationModel/{base_file_name}/read_orientation_model.tar.gz"
@@ -80,7 +80,7 @@ rule LearnReadOrientationModel:
 		"logs/learn_read_orientation_model/{base_file_name}_learn_read_orientation_model.txt"
 	shell:
 		"({params.gatk} LearnReadOrientationModel \
-		-I {input.chr1_tar} \
+		#-I {input.chr1_tar} \
 		-I {input.chr2_tar} \
 		-I {input.chr3_tar} \
 		-I {input.chr4_tar} \
@@ -96,12 +96,12 @@ rule LearnReadOrientationModel:
 		-I {input.chr14_tar} \
 		-I {input.chr15_tar} \
 		-I {input.chr16_tar} \
-		-I {input.chr17_tar} \
+		#-I {input.chr17_tar} \
 		-I {input.chr18_tar} \
 		-I {input.chr19_tar} \
 		-I {input.chr20_tar} \
 		-I {input.chr21_tar} \
 		-I {input.chr22_tar} \
-		-I {input.chrX_tar} \
+		#-I {input.chrX_tar} \
 		-I {input.chrY_tar} \
 		-O {output}) 2> {log}"
