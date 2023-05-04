@@ -14,10 +14,10 @@ rule mutect2:
         tumor_filepath = config["samples"]
         
     output:
-        vcf = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
-        tbi = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
-        tar = temp("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
-        stats = temp("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats")
+        vcf = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
+        tbi = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
+        tar = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
+        stats = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats")
     params:
         # Edited these to match my config.yaml file
         reference_genome = config["reference_genome"],
@@ -41,14 +41,14 @@ rule mutect2:
 
 rule MergeMutectStats:
      output:
-        protected("results/{base_file_name}/mutect_merged.stats")
+        protected("results/MergeMutectStats/{base_file_name}/mutect_merged.stats")
      params:
         gatk = config["gatk_path"]
      log:
         "logs/MergeMutectStats/{base_file_name}_merge_mutect_stats.txt"
      shell:
         """all_stat_inputs=`for chromosome in {wildcards.chromosomes}; do
-        printf -- "-stats results/{base_file_name}/unfiltered_$chromosome.vcf.gz.stats "; done`
+        printf -- "-stats results/mutect2/{base_file_name}/unfiltered_$chromosome.vcf.gz.stats "; done`
 
     ({params.gatk} MergeMutectStats \
         $all_stat_inputs \
