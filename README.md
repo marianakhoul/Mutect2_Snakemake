@@ -1,6 +1,6 @@
 # Mutect2
 
-mutect2 run for multiple input bams.
+mutect2 run for multiple input bams and splits by chromosome.
 
 ## Run
 ```
