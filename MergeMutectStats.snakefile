@@ -102,3 +102,17 @@ rule LearnReadOrientationModel:
 		-I {input.chr22_tar} \
 		-I {input.chrY_tar} \
 		-O {output}) 2> {log}"
+
+rule IndexFeatureFile:
+	input:
+		vcf = expand("results/GatherVcfs/{base_file_name}/gathered_unfiltered.vcf.gz",base_file_name=config["base_file_name"])
+	outut:
+		"results/GatherVcfs/{base_file_name}/gathered_unfiltered.vcf.gz.tbi"
+	params:
+		gatk = config["gatk_path"]
+	log:
+		"logs/IndexFeatureFile/{base_file_name}.log"
+	shell:
+		"({params.gatk} IndexFeatureFile \
+		-I {input.vcf} \
+		-O {output}) 2> {log}"
