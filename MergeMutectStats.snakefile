@@ -59,5 +59,6 @@ rule LearnReadOrientationModel:
 		printf -- "-I results/{wildcards.base_file_name}/unfiltered_$chrom_f1r2.tar.gz "; done` 
 	
 		({params.gatk} LearnReadOrientationModel \
-		$all_f1r2_inputs \
+		#$all_f1r2_inputs \
+		-I f1r2.list \
 		-O {output}) 2> {log}"""
