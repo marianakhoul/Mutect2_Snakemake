@@ -21,12 +21,12 @@ rule MergeMutectStats:
      log:
         "logs/MergeMutectStats/{tumors}_merge_mutect_stats.txt"
      shell:
-        "
+        """
 	all_stat_inputs=`for chromosome in {chromosomes}; do
         printf -- "-stats results/{tumors}/unfiltered_${chromosome}.vcf.gz.stats "; done`
 
 	({params.gatk} MergeMutectStats \
         $all_stat_inputs \
-        -O {output}) 2> {log}"
+        -O {output}) 2> {log}"""
 
  
