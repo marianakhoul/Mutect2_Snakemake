@@ -26,7 +26,7 @@ rule MergeMutectStats:
 		$all_stat_inputs \
 		-O {output}) 2> {log}"""
 
- rule GatherVcfs:
+rule GatherVcfs:
 	output:
 		"results/GatherVcfs/{base_file_name}/gathered_unfiltered.vcf.gz"
 	params:
