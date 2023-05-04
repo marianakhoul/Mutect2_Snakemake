@@ -38,7 +38,7 @@ rule GatherVcfs:
 	shell:
 		"""
 		all_vcf_inputs=`for chrom in {params.chromosomes}; do
-		printf -- "-I results/{wildcards.base_file_name}/unfiltered_$chrom.vcf.gz "; done`
+		printf -- "I=results/{wildcards.base_file_name}/unfiltered_$chrom.vcf.gz "; done`
 	
 		({params.java} -jar {params.picard_jar} GatherVcfs \
 		$all_vcf_inputs \
