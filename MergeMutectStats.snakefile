@@ -5,7 +5,7 @@ configfile: "config/config.yaml"
 
 rule all:
     input:
-	expand("results/{base_file_name}/mutect_merged.stats", base_file_name = config["base_file_name"])
+	expand("results/{base_file_name}/mutect_merged.stats",base_file_name = config["base_file_name"])
 	#expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
 	#expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
 	#expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
