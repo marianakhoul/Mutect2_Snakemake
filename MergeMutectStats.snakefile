@@ -4,8 +4,8 @@ configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
 rule all:
-    input:
-	expand("results/MergeMutectStats/{base_file_name}/mutect_merged.stats",base_file_name=config["base_file_name"])
+	input:
+		expand("results/MergeMutectStats/{base_file_name}/mutect_merged.stats",base_file_name=config["base_file_name"])
 
 rule MergeMutectStats:
 	output:
