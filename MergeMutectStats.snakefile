@@ -56,7 +56,7 @@ rule LearnReadOrientationModel:
 	shell:
 		"""
 		all_f1r2_inputs=`for chrom in {params.chromosomes}; do
-		printf -- "-input results/{wildcards.base_file_name}/unfiltered_$chrom_f1r2.tar.gz "; done` 
+		printf -- "I=results/{wildcards.base_file_name}/unfiltered_$chrom_f1r2.tar.gz "; done` 
 		
 		echo -e $all_f1r2_inputs > f1r2.list
 	
