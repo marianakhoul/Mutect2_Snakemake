@@ -132,7 +132,7 @@ rule GetPileupSummariesTumor:
 	shell:
 		"({params.gatk} GetPileupSummaries \
 		-reference {params.reference_genome} \
-		-I /mnt/scratch/DTRCC10/DTRCC10_Rkidney.bam  \
+		-I \ #need the tumor bams
 		-V {params.small_exac_common} \
 		-L {params.small_exac_common} \
 		-O {output.table}) 2> {log}"
