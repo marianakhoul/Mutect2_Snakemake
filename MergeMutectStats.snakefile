@@ -3,6 +3,8 @@ import os
 configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
+CHRS = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,20,21,22,'Y']	
+
 rule all:
 	input:
 		expand("results/MergeMutectStats/{base_file_name}/mutect_merged.stats",base_file_name=config["base_file_name"])
@@ -16,7 +18,7 @@ rule MergeMutectStats:
 		"logs/MergeMutectStats/{base_file_name}_merge_mutect_stats.txt"
 	shell:
 		"""
-		all_stat_inputs=`for chromosome in {chromosomes}; do
+		all_stat_inputs=`for chromosome in CHRS; do
 		printf -- "-stats results/{base_file_name}/unfiltered_${chromosome}.vcf.gz.stats "; done`
 		
 		({params.gatk} MergeMutectStats \
