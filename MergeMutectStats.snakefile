@@ -117,4 +117,3 @@ rule IndexFeatureFile:
 		"({params.gatk} IndexFeatureFile \
 		-I {input.vcf} \
 		-O {output}) 2> {log}"
-
