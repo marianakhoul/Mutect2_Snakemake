@@ -96,7 +96,7 @@ rule MergeMutectStats:
 	shell:
 		"""
 		all_stat_inputs=`for chrom in {params.chromosomes}; do
-		printf -- "-stats results/{wildcards.base_file_name}/unfiltered_$chrom.vcf.gz.stats "; done`
+		printf -- "-stats results/mutect2/{wildcards.base_file_name}/unfiltered_$chrom.vcf.gz.stats "; done`
 		
 		({params.gatk} MergeMutectStats \
 		$all_stat_inputs \
@@ -114,7 +114,7 @@ rule GatherVcfs:
 	shell:
 		"""
 		all_vcf_inputs=`for chrom in {params.chromosomes}; do
-		printf -- "I=results/{wildcards.base_file_name}/unfiltered_$chrom.vcf.gz "; done`
+		printf -- "I=results/mutect2/{wildcards.base_file_name}/unfiltered_$chrom.vcf.gz "; done`
 	
 		({params.java} -jar {params.picard_jar} GatherVcfs \
 		$all_vcf_inputs \
@@ -123,30 +123,30 @@ rule GatherVcfs:
 
 rule LearnReadOrientationModel:
 	input:
-		chr1_tar = "results/{base_file_name}/unfiltered_chr1_f1r2.tar.gz",
-		chr2_tar = "results/{base_file_name}/unfiltered_chr2_f1r2.tar.gz",
-		chr3_tar = "results/{base_file_name}/unfiltered_chr3_f1r2.tar.gz",
-		chr4_tar = "results/{base_file_name}/unfiltered_chr4_f1r2.tar.gz",
-		chr5_tar = "results/{base_file_name}/unfiltered_chr5_f1r2.tar.gz",
-		chr6_tar = "results/{base_file_name}/unfiltered_chr6_f1r2.tar.gz",
-		chr7_tar = "results/{base_file_name}/unfiltered_chr7_f1r2.tar.gz",
-		chr8_tar = "results/{base_file_name}/unfiltered_chr8_f1r2.tar.gz",
-		chr9_tar = "results/{base_file_name}/unfiltered_chr9_f1r2.tar.gz",
-		chr10_tar = "results/{base_file_name}/unfiltered_chr10_f1r2.tar.gz",
-		chr11_tar = "results/{base_file_name}/unfiltered_chr11_f1r2.tar.gz",
-		chr12_tar = "results/{base_file_name}/unfiltered_chr12_f1r2.tar.gz",
-		chr13_tar = "results/{base_file_name}/unfiltered_chr13_f1r2.tar.gz",
-		chr14_tar = "results/{base_file_name}/unfiltered_chr14_f1r2.tar.gz",
-		chr15_tar = "results/{base_file_name}/unfiltered_chr15_f1r2.tar.gz",
-		chr16_tar = "results/{base_file_name}/unfiltered_chr16_f1r2.tar.gz",
-		chr17_tar = "results/{base_file_name}/unfiltered_chr17_f1r2.tar.gz",
-		chr18_tar = "results/{base_file_name}/unfiltered_chr18_f1r2.tar.gz",
-		chr19_tar = "results/{base_file_name}/unfiltered_chr19_f1r2.tar.gz",
-		chr20_tar = "results/{base_file_name}/unfiltered_chr20_f1r2.tar.gz",
-		chr21_tar = "results/{base_file_name}/unfiltered_chr21_f1r2.tar.gz",
-		chr22_tar = "results/{base_file_name}/unfiltered_chr22_f1r2.tar.gz",
-		chrX_tar = "results/{base_file_name}/unfiltered_chrX_f1r2.tar.gz",
-		chrY_tar = "results/{base_file_name}/unfiltered_chrY_f1r2.tar.gz"
+		chr1_tar = "results/mutect2/{base_file_name}/unfiltered_chr1_f1r2.tar.gz",
+		chr2_tar = "results/mutect2/{base_file_name}/unfiltered_chr2_f1r2.tar.gz",
+		chr3_tar = "results/mutect2/{base_file_name}/unfiltered_chr3_f1r2.tar.gz",
+		chr4_tar = "results/mutect2/{base_file_name}/unfiltered_chr4_f1r2.tar.gz",
+		chr5_tar = "results/mutect2/{base_file_name}/unfiltered_chr5_f1r2.tar.gz",
+		chr6_tar = "results/mutect2/{base_file_name}/unfiltered_chr6_f1r2.tar.gz",
+		chr7_tar = "results/mutect2/{base_file_name}/unfiltered_chr7_f1r2.tar.gz",
+		chr8_tar = "results/mutect2/{base_file_name}/unfiltered_chr8_f1r2.tar.gz",
+		chr9_tar = "results/mutect2/{base_file_name}/unfiltered_chr9_f1r2.tar.gz",
+		chr10_tar = "results/mutect2/{base_file_name}/unfiltered_chr10_f1r2.tar.gz",
+		chr11_tar = "results/mutect2/{base_file_name}/unfiltered_chr11_f1r2.tar.gz",
+		chr12_tar = "results/mutect2/{base_file_name}/unfiltered_chr12_f1r2.tar.gz",
+		chr13_tar = "results/mutect2/{base_file_name}/unfiltered_chr13_f1r2.tar.gz",
+		chr14_tar = "results/mutect2/{base_file_name}/unfiltered_chr14_f1r2.tar.gz",
+		chr15_tar = "results/mutect2/{base_file_name}/unfiltered_chr15_f1r2.tar.gz",
+		chr16_tar = "results/mutect2/{base_file_name}/unfiltered_chr16_f1r2.tar.gz",
+		chr17_tar = "results/mutect2/{base_file_name}/unfiltered_chr17_f1r2.tar.gz",
+		chr18_tar = "results/mutect2/{base_file_name}/unfiltered_chr18_f1r2.tar.gz",
+		chr19_tar = "results/mutect2/{base_file_name}/unfiltered_chr19_f1r2.tar.gz",
+		chr20_tar = "results/mutect2/{base_file_name}/unfiltered_chr20_f1r2.tar.gz",
+		chr21_tar = "results/mutect2/{base_file_name}/unfiltered_chr21_f1r2.tar.gz",
+		chr22_tar = "results/mutect2/{base_file_name}/unfiltered_chr22_f1r2.tar.gz",
+		chrX_tar = "results/mutect2/{base_file_name}/unfiltered_chrX_f1r2.tar.gz",
+		chrY_tar = "results/mutect2/{base_file_name}/unfiltered_chrY_f1r2.tar.gz"
 	output:
 		"results/LearnReadOrientationModel/{base_file_name}/read_orientation_model.tar.gz"
 	params:
