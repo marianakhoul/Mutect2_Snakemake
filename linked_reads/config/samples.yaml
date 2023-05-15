@@ -1,10 +1,10 @@
 #samples.yaml for mutect2.snakefile
 
 base_file_name: 
-  DTRCC6_LKidneyResection: linked_reads/DTRCC6_LKidneyResection.bam.list
-  DTRCC8_Lkidney: linked_reads/DTRCC8_Lkidney.bam.list
-  DTRCC10_Rkidney: linked_reads/DTRCC10_Rkidney.bam.list
-  DTRCC5_LPAnode: linked_reads/DTRCC5_LPAnode.bam.list
+  DTRCC6_LKidneyResection: /home/mi724/Tools/Mutect2_Snakemake/linked_reads/DTRCC6_LKidneyResection.bam.list
+  DTRCC8_Lkidney: /home/mi724/Tools/Mutect2_Snakemake/linked_reads/DTRCC8_Lkidney.bam.list
+  DTRCC10_Rkidney: /home/mi724/Tools/Mutect2_Snakemake/linked_reads/DTRCC10_Rkidney.bam.list
+  DTRCC5_LPAnode: /home/mi724/Tools/Mutect2_Snakemake/linked_reads/DTRCC5_LPAnode.bam.list
 
 normals:
   DTRCC6_LKidneyResection: DTRCC6_AdjNormal
