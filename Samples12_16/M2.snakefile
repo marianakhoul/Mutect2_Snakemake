@@ -18,7 +18,7 @@ if m2_extra_args == True:
 	rule mutect2:
 		input:
 			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor],
-			normals = lambda wildcards: config["base_file_name"][config["normals"][wildcards.tumor]]
+			normals = lambda wildcards: config["normals"][wildcards.tumor]
 		output:
 			vcf = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz"),
 			tbi = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi"),
