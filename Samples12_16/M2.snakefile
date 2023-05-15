@@ -17,7 +17,8 @@ rule all:
 if m2_extra_args == True:
 	rule mutect2:
 		input:
-			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
+			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor],
+			normals = lambda wildcards: config["base_file_name"][config["normals"][wildcards.tumor]]
 		output:
 			vcf = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz"),
 			tbi = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi"),
@@ -27,15 +28,15 @@ if m2_extra_args == True:
 			reference_genome = config["reference_genome"],
 			germline_resource = config["germline_resource"],
 			gatk = config["gatk_path"],
-			panel_of_normals = config["panel_of_normals"],
-			normals = lambda wildcards: config["base_file_name"][config["normals"][wildcards.tumor]]
+			panel_of_normals = config["panel_of_normals"]
+			
 		log:
 			"logs/mutect2/{tumor}_{chromosomes}_mutect2.txt"
 		shell:
 			"({params.gatk} Mutect2 \
 			-reference {params.reference_genome} \
 			-input {input.tumor_filepath} \
-			-normal {params.normals} \
+			-normal {input.normals} \
 			-intervals {wildcards.chromosomes} \
 			--germline-resource {params.germline_resource} \
 			--f1r2-tar-gz {output.tar} \
@@ -59,7 +60,8 @@ if m2_extra_args == True:
 else:
 	rule mutect2:
 		input:
-			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
+			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor],
+			normals = lambda wildcards: config["base_file_name"][config["normals"][wildcards.tumor]]
 		output:
 			vcf = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
 			tbi = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
@@ -70,14 +72,13 @@ else:
 			germline_resource = config["germline_resource"],
 			gatk = config["gatk_path"],
 			panel_of_normals = config["panel_of_normals"],
-			normals = config["base_file_name"][config["normals"][wildcards.tumor]]
 		log:
 			"logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
 		shell:
         		"({params.gatk} Mutect2 \
 			-reference {params.reference_genome} \
 			-input {input.tumor_filepath} \
-			-normal {params.normals} \
+			-normal {input.normals} \
 			-intervals {wildcards.chromosomes} \
 			--germline-resource {params.germline_resource} \
 			--f1r2-tar-gz {output.tar} \
