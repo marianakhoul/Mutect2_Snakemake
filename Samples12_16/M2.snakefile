@@ -13,61 +13,75 @@ rule all:
 	expand("results/LearnReadOrientationModel/{base_file_name}/read_orientation_model.tar.gz", base_file_name = config["base_file_name"]),
 	expand("results/GatherVcfs/{base_file_name}/gathered_unfiltered.vcf.gz.tbi", base_file_name = config["base_file_name"])
 
-rule mutect2:
-    input:
-        tumor_filepath = config["samples"]
-    output:
-        vcf = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
-        tbi = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
-        tar = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
-        stats = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats")
-    params:
-        reference_genome = config["reference_genome"],
-        germline_resource = config["germline_resource"],
-        gatk = config["gatk_path"],
-        panel_of_normals = config["panel_of_normals"],
-        normals = config["normals"],
-	m2_extra_args=config["m2_extra_args"]
-    log:
-        "logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
-    run:
-        
-	if params.m2_extra_args:
-		shell("({params.gatk} Mutect2 \
-        	-reference {params.reference_genome} \
-        	-input {input.tumor_filepath} \
-        	-normal {params.normals} \
-        	-intervals {wildcards.chromosomes} \
-        	--germline-resource {params.germline_resource} \
-        	--f1r2-tar-gz {output.tar} \
-        	--panel-of-normals {params.panel_of_normals} \
-		--read-filter PassesVendorQualityCheckReadFilter \
-		--read-filter HasReadGroupReadFilter \
- 		--read-filter NotDuplicateReadFilter \
-		--read-filter MappingQualityAvailableReadFilter \
-		--read-filter MappingQualityReadFilter \
-		--minimum-mapping-quality 30 \
-		--read-filter OverclippedReadFilter \
-		--filter-too-short 25 \
-		--read-filter GoodCigarReadFilter \
-		--read-filter AmbiguousBaseReadFilter \
-		--native-pair-hmm-threads 2 \
-		--seconds-between-progress-updates 100 \
-		--downsampling-stride 20 \
-		--max-reads-per-alignment-start 6 \
-		--max-suspicious-reads-per-alignment-start 6 \
-        	-output {output.vcf}) 2> {log}")
-        else:
-		shell("({params.gatk} Mutect2 \
-        	-reference {params.reference_genome} \
-        	-input {input.tumor_filepath} \
-        	-normal {params.normals} \
-        	-intervals {wildcards.chromosomes} \
-        	--germline-resource {params.germline_resource} \
-        	--f1r2-tar-gz {output.tar} \
-        	--panel-of-normals {params.panel_of_normals} \
-        	-output {output.vcf}) 2> {log}")
-            
+if m2_extra_args == True:
+	rule mutect2:
+		input:
+			tumor_filepath = config["samples"]
+		output:
+			vcf = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
+			tbi = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
+			tar = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
+			stats = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats")
+		params:
+			reference_genome = config["reference_genome"],
+			germline_resource = config["germline_resource"],
+			gatk = config["gatk_path"],
+			panel_of_normals = config["panel_of_normals"],
+			normals = config["normals"]
+		log:
+			"logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
+		shell:
+			"({params.gatk} Mutect2 \
+			-reference {params.reference_genome} \
+			-input {input.tumor_filepath} \
+			-normal {params.normals} \
+			-intervals {wildcards.chromosomes} \
+			--germline-resource {params.germline_resource} \
+			--f1r2-tar-gz {output.tar} \
+			--panel-of-normals {params.panel_of_normals} \
+			--read-filter PassesVendorQualityCheckReadFilter \
+			--read-filter HasReadGroupReadFilter \
+			--read-filter NotDuplicateReadFilter \
+			--read-filter MappingQualityAvailableReadFilter \
+			--read-filter MappingQualityReadFilter \
+			--minimum-mapping-quality 30 \
+			--read-filter OverclippedReadFilter \
+			--filter-too-short 25 \
+			--read-filter GoodCigarReadFilter \
+			--read-filter AmbiguousBaseReadFilter \
+			--native-pair-hmm-threads 2 \
+			--seconds-between-progress-updates 100 \
+			--downsampling-stride 20 \
+			--max-reads-per-alignment-start 6 \
+			--max-suspicious-reads-per-alignment-start 6 \
+			-output {output.vcf}) 2> {log}"
+else:
+	rule mutect2:
+		input:
+			tumor_filepath = config["samples"]
+		output:
+			vcf = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
+			tbi = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
+			tar = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
+			stats = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats")
+		params:
+			reference_genome = config["reference_genome"],
+			germline_resource = config["germline_resource"],
+			gatk = config["gatk_path"],
+			panel_of_normals = config["panel_of_normals"],
+			normals = config["normals"]
+		log:
+			"logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
+		shell:
+        		"({params.gatk} Mutect2 \
+			-reference {params.reference_genome} \
+			-input {input.tumor_filepath} \
+			-normal {params.normals} \
+			-intervals {wildcards.chromosomes} \
+			--germline-resource {params.germline_resource} \
+			--f1r2-tar-gz {output.tar} \
+			--panel-of-normals {params.panel_of_normals} \
+			-output {output.vcf}) 2> {log}"
 
 rule MergeMutectStats:
 	output:
