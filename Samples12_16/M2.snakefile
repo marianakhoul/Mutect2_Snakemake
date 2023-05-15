@@ -9,6 +9,8 @@ rule all:
 		expand("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi",tumor=config["normals"],chromosomes=config["chromosomes"]),
 		expand("results/mutect2/{tumor}/unfiltered_{chromosomes}_f1r2.tar.gz",tumor=config["normals"],chromosomes=config["chromosomes"]),
 		expand("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.stats",tumor=config["normals"],chromosomes=config["chromosomes"]),
+		expand("results/mutect2/{tumor}/{tumor}_{chromosomes}_bamout.bai",tumor=config["normals"],chromosomes=config["chromosomes"]),
+		expand("results/mutect2/{tumor}/{tumor}_{chromosomes}_bamout.bam",tumor=config["normals"],chromosomes=config["chromosomes"]),
 		expand("results/MergeMutectStats/{tumor}/mutect_merged.stats",tumor=config["normals"]),
 		expand("results/GatherVcfs/{tumor}/gathered_unfiltered.vcf.gz",tumor=config["normals"]),
 		expand("results/LearnReadOrientationModel/{tumor}/read_orientation_model.tar.gz", tumor = config["normals"]),
@@ -23,7 +25,7 @@ if m2_extra_args == True:
 			tbi = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi"),
 			tar = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}_f1r2.tar.gz"),
 			stats = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.stats"),
-			bam = "results/mutect2/{tumor}_{chromosomes}_bamout.bam"
+			bam = "results/mutect2/{tumor}/{tumor}_{chromosomes}_bamout.bam"
 		params:
 			reference_genome = config["reference_genome"],
 			germline_resource = config["germline_resource"],
@@ -68,7 +70,8 @@ else:
 			tbi = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
 			tar = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
 			stats = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats"),
-			bam = "results/mutect2/{tumor}_{chromosomes}_bamout.bam"
+			bam = "results/mutect2/{tumor}/{tumor}_{chromosomes}_bamout.bam",
+			bai = "results/mutect2/{tumor}/{tumor}_{chromosomes}_bamout.bai"
 		params:
 			reference_genome = config["reference_genome"],
 			germline_resource = config["germline_resource"],
