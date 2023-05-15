@@ -1,6 +1,6 @@
 #samples.yaml for mutect2.snakefile
 
-samples: 
+base_file_name: 
   DTRCC_12: Mutect2_Snakemake/Samples12_16/Sample12bam.list
   RTRCC_16: Mutect2_Snakemake/Samples12_16/Sample16bam.list
 
