@@ -25,7 +25,8 @@ if m2_extra_args == True:
 			tbi = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi"),
 			tar = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}_f1r2.tar.gz"),
 			stats = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.stats"),
-			bam = "results/mutect2/{tumor}/{tumor}_{chromosomes}_bamout.bam"
+			bam = "results/mutect2/{tumor}/{tumor}_{chromosomes}_bamout.bam",
+			bai = "results/mutect2/{tumor}/{tumor}_{chromosomes}_bamout.bai"
 		params:
 			reference_genome = config["reference_genome"],
 			germline_resource = config["germline_resource"],
