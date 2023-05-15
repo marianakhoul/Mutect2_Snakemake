@@ -5,25 +5,25 @@ m2_extra_args=config["m2_extra_args"]
 	
 rule all:
     input:
-        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats",base_file_name=config["base_file_name"],chromosomes=config["chromosomes"]),
-        expand("results/{base_file_name}/mutect_merged.stats", base_file_name = config["base_file_name"]),
-        expand("results/MergeMutectStats/{base_file_name}/mutect_merged.stats",base_file_name=config["base_file_name"]),
-	expand("results/GatherVcfs/{base_file_name}/gathered_unfiltered.vcf.gz",base_file_name=config["base_file_name"]),
-	expand("results/LearnReadOrientationModel/{base_file_name}/read_orientation_model.tar.gz", base_file_name = config["base_file_name"]),
-	expand("results/GatherVcfs/{base_file_name}/gathered_unfiltered.vcf.gz.tbi", base_file_name = config["base_file_name"])
+        expand("results/{}/unfiltered_{chromosomes}.vcf.gz",tumor=config["normals"],chromosomes=config["chromosomes"]),
+        expand("results/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi",tumor=config["normals"],chromosomes=config["chromosomes"]),
+        expand("results/{tumor}/unfiltered_{chromosomes}_f1r2.tar.gz",tumor=config["normals"],chromosomes=config["chromosomes"]),
+        expand("results/{tumor}/unfiltered_{chromosomes}.vcf.gz.stats",tumor=config["normals"],chromosomes=config["chromosomes"]),
+        expand("results/{tumor}/mutect_merged.stats", tumor = config["normals"]),
+        expand("results/MergeMutectStats/{tumor}/mutect_merged.stats",tumor=config["normals"]),
+	expand("results/GatherVcfs/{tumor}/gathered_unfiltered.vcf.gz",tumor=config["normals"]),
+	expand("results/LearnReadOrientationModel/{tumor}/read_orientation_model.tar.gz", tumor = config["normals"]),
+	expand("results/GatherVcfs/{tumor}/gathered_unfiltered.vcf.gz.tbi", tumor = config["normals"])
 
 if m2_extra_args == True:
 	rule mutect2:
 		input:
 			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
 		output:
-			vcf = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
-			tbi = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
-			tar = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}_f1r2.tar.gz"),
-			stats = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.stats")
+			vcf = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz"),
+			tbi = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi"),
+			tar = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}_f1r2.tar.gz"),
+			stats = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.stats")
 		params:
 			reference_genome = config["reference_genome"],
 			germline_resource = config["germline_resource"],
@@ -31,7 +31,7 @@ if m2_extra_args == True:
 			panel_of_normals = config["panel_of_normals"],
 			normals = config["base_file_name"][config["normals"][wildcards.tumor]]
 		log:
-			"logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
+			"logs/mutect2/{tumor}_{chromosomes}_mutect2.txt"
 		shell:
 			"({params.gatk} Mutect2 \
 			-reference {params.reference_genome} \
@@ -60,7 +60,7 @@ if m2_extra_args == True:
 else:
 	rule mutect2:
 		input:
-			tumor_filepath = config["samples"]
+			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
 		output:
 			vcf = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
 			tbi = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
@@ -71,7 +71,7 @@ else:
 			germline_resource = config["germline_resource"],
 			gatk = config["gatk_path"],
 			panel_of_normals = config["panel_of_normals"],
-			normals = config["normals"]
+			normals = config["base_file_name"][config["normals"][wildcards.tumor]]
 		log:
 			"logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
 		shell:
@@ -87,16 +87,16 @@ else:
 
 rule MergeMutectStats:
 	output:
-		"results/MergeMutectStats/{base_file_name}/mutect_merged.stats"
+		"results/MergeMutectStats/{tumor}/mutect_merged.stats"
 	params:
 		gatk = config["gatk_path"],
 		chromosomes=config["chromosomes"]
 	log:
-		"logs/MergeMutectStats/{base_file_name}_merge_mutect_stats.txt"
+		"logs/MergeMutectStats/{tumor}_merge_mutect_stats.txt"
 	shell:
 		"""
 		all_stat_inputs=`for chrom in {params.chromosomes}; do
-		printf -- "-stats results/mutect2/{wildcards.base_file_name}/unfiltered_$chrom.vcf.gz.stats "; done`
+		printf -- "-stats results/mutect2/{wildcards.tumor}/unfiltered_$chrom.vcf.gz.stats "; done`
 		
 		({params.gatk} MergeMutectStats \
 		$all_stat_inputs \
