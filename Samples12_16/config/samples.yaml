@@ -1,8 +1,8 @@
 #samples.yaml for mutect2.snakefile
 
 base_file_name: 
-  DTRCC_12: Mutect2_Snakemake/Samples12_16/Sample12bam.list
-  RTRCC_16: Mutect2_Snakemake/Samples12_16/Sample16bam.list
+  DTRCC_12: /home/mi724/Tools/Mutect2_Snakemake/Samples12_16/Sample12bam.list
+  RTRCC_16: /home/mi724/Tools/Mutect2_Snakemake/Samples12_16/Sample16bam.list
 
 normals:
   DTRCC_12: DTRCC_12_Blood
