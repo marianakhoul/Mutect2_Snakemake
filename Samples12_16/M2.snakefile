@@ -4,16 +4,16 @@ configfile: "config/config.yaml"
 m2_extra_args=config["m2_extra_args"]
 	
 rule all:
-    input:
-        expand("results/{}/unfiltered_{chromosomes}.vcf.gz",tumor=config["normals"],chromosomes=config["chromosomes"]),
-        expand("results/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi",tumor=config["normals"],chromosomes=config["chromosomes"]),
-        expand("results/{tumor}/unfiltered_{chromosomes}_f1r2.tar.gz",tumor=config["normals"],chromosomes=config["chromosomes"]),
-        expand("results/{tumor}/unfiltered_{chromosomes}.vcf.gz.stats",tumor=config["normals"],chromosomes=config["chromosomes"]),
-        expand("results/{tumor}/mutect_merged.stats", tumor = config["normals"]),
-        expand("results/MergeMutectStats/{tumor}/mutect_merged.stats",tumor=config["normals"]),
-	expand("results/GatherVcfs/{tumor}/gathered_unfiltered.vcf.gz",tumor=config["normals"]),
-	expand("results/LearnReadOrientationModel/{tumor}/read_orientation_model.tar.gz", tumor = config["normals"]),
-	expand("results/GatherVcfs/{tumor}/gathered_unfiltered.vcf.gz.tbi", tumor = config["normals"])
+	input:
+		expand("results/{}/unfiltered_{chromosomes}.vcf.gz",tumor=config["normals"],chromosomes=config["chromosomes"]),
+		expand("results/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi",tumor=config["normals"],chromosomes=config["chromosomes"]),
+		expand("results/{tumor}/unfiltered_{chromosomes}_f1r2.tar.gz",tumor=config["normals"],chromosomes=config["chromosomes"]),
+		expand("results/{tumor}/unfiltered_{chromosomes}.vcf.gz.stats",tumor=config["normals"],chromosomes=config["chromosomes"]),
+		expand("results/{tumor}/mutect_merged.stats", tumor = config["normals"]),
+		expand("results/MergeMutectStats/{tumor}/mutect_merged.stats",tumor=config["normals"]),
+		expand("results/GatherVcfs/{tumor}/gathered_unfiltered.vcf.gz",tumor=config["normals"]),
+		expand("results/LearnReadOrientationModel/{tumor}/read_orientation_model.tar.gz", tumor = config["normals"]),
+		expand("results/GatherVcfs/{tumor}/gathered_unfiltered.vcf.gz.tbi", tumor = config["normals"])
 
 if m2_extra_args == True:
 	rule mutect2:
