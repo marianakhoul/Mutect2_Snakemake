@@ -5,7 +5,7 @@ m2_extra_args=config["m2_extra_args"]
 	
 rule all:
 	input:
-		expand("results/{}/unfiltered_{chromosomes}.vcf.gz",tumor=config["normals"],chromosomes=config["chromosomes"]),
+		expand("results/{tumor}/unfiltered_{chromosomes}.vcf.gz",tumor=config["normals"],chromosomes=config["chromosomes"]),
 		expand("results/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi",tumor=config["normals"],chromosomes=config["chromosomes"]),
 		expand("results/{tumor}/unfiltered_{chromosomes}_f1r2.tar.gz",tumor=config["normals"],chromosomes=config["chromosomes"]),
 		expand("results/{tumor}/unfiltered_{chromosomes}.vcf.gz.stats",tumor=config["normals"],chromosomes=config["chromosomes"]),
