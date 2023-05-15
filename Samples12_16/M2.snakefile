@@ -18,7 +18,7 @@ rule all:
 if m2_extra_args == True:
 	rule mutect2:
 		input:
-			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
+			tumor_filepath = lambda wildcards: config["base_file_name"]
 		output:
 			vcf = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
 			tbi = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
@@ -29,7 +29,7 @@ if m2_extra_args == True:
 			germline_resource = config["germline_resource"],
 			gatk = config["gatk_path"],
 			panel_of_normals = config["panel_of_normals"],
-			normals = lambda wildcards: config["normals"][wildcards.tumor]
+			normals = lambda wildcards: config["normals"]
 		log:
 			"logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
 		shell:
