@@ -29,7 +29,7 @@ if m2_extra_args == True:
 			germline_resource = config["germline_resource"],
 			gatk = config["gatk_path"],
 			panel_of_normals = config["panel_of_normals"],
-			normals = config["normals"]
+			normals = lambda wildcards: config["normals"][wildcards.tumor]
 		log:
 			"logs/mutect2/{base_file_name}_{chromosomes}_mutect2.txt"
 		shell:
