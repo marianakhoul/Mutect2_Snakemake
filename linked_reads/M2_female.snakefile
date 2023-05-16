@@ -1,5 +1,5 @@
-configfile: "config/samples.yaml"
-configfile: "config/config.yaml" 
+configfile: "config/samples_female.yaml"
+configfile: "config/config_female.yaml" 
 
 m2_extra_args=config["m2_extra_args"]
 	
