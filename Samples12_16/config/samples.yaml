@@ -3,7 +3,9 @@
 base_file_name: 
   DTRCC_12: /home/mi724/Tools/Mutect2_Snakemake/Samples12_16/Sample12bam.list
   RTRCC_16: /home/mi724/Tools/Mutect2_Snakemake/Samples12_16/Sample16bam.list
+  DTRCC_14: /home/mi724/Tools/Mutect2_Snakemake/Samples12_16/Sample14bam.list
 
 normals:
   DTRCC_12: DTRCC_12_Blood
   RTRCC_16: RTRCC_16_PBMC
+  DTRCC_14: DTRCC_14_AdjNormal
