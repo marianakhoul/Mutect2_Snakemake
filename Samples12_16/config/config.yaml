@@ -10,6 +10,7 @@ picard_jar: /home/ma1111/tools/picard.jar
 reference_genome: /mnt/storage/labs/sviswanathan/GATK_ref/Homo_sapiens_assembly38.fasta
 germline_resource: /mnt/storage/labs/sviswanathan/GATK_ref/cz_ref/hg38_pon/af-only-gnomad.hg38.vcf.gz
 panel_of_normals: /mnt/storage/labs/sviswanathan/GATK_ref/cz_ref/hg38_pon/M2PoN_4.0_WGS_for_public.vcf
+variants_for_contamination: /mnt/storage/labs/sviswanathan/GATK_ref/cz_ref/mutect2-contamination-variants.hg38_primary.vcf.gz
 #small_exac_common: /mnt/storage/labs/sviswanathan/GATK_ref/small_exac_common_3.hg38.vcf.gz
 
 #Interval chromosomes
