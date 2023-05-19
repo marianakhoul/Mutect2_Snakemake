@@ -7,6 +7,10 @@ rule all:
 rule GetPileupSummaries:
     input:
     output:
+        
     params:
+        gatk = config["gatk_path"],
+        variants_for_contamination = config["variants_for_contamination"]
     log:
+        "logs/get_pileup_summaries/{tumors}_get_pileup_summaries.txt"
     shell:
