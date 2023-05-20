@@ -23,7 +23,7 @@ rule MergeBamOuts:
     shell:
         """
 	all_bamout_inputs=`for chrom in {params.chromosomes}; do
-	printf -- "I=results/mutect2/{wildcards.tumor}/{wildcards.tumor}_${chrom}_bamout.bam "; done`
+	printf -- "I=results/mutect2/{wildcards.tumor}/{wildcards.tumor}_${{chrom}}_bamout.bam "; done`
 	
 	({params.java} -jar {params.picard_jar} GatherBamFiles \
         R={params.reference_genome} \
