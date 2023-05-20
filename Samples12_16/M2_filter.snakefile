@@ -9,12 +9,12 @@ rule GetPileupSummaries:
     input:
         filepaths = lambda wildcards: config["base_file_name"][wildcards.tumor]
     output:
-        "results/{tumor}/pileup_summaries.table"
+        expand("results/GetPileupSummaries/{tumor}/pileup_summaries.table",tumor=config["base_file_name"])
     params:
         gatk = config["gatk_path"],
         variants_for_contamination = config["variants_for_contamination"]
     log:
-        "logs/get_pileup_summaries/{tumors}_get_pileup_summaries.txt"
+        expand("logs/GetPileupSummaries/{tumors}_get_pileup_summaries.txt",tumor=config["base_file_name"])
     shell:
         "({params.gatk} GetPileupSummaries \
         -I {input.filepaths} \
