@@ -31,13 +31,13 @@ rule MergeBamOuts:
 	O={output.unsorted_output}
 
         {params.java} -jar {params.picard_jar} SortSam \
-        I={output.unsorted_output}
-        O={output.bam_out}
-        SORT_ORDER=coordinate 
+        I={output.unsorted_output} \
+        O={output.bam_out} \
+        SORT_ORDER=coordinate \
         VALIDATION_STRINGENCY=LENIENT
 
-        {params.java} -jar {params.picard_jar} BuildBamIndex 
-        I={output.bam_out}
+        {params.java} -jar {params.picard_jar} BuildBamIndex \
+        I={output.bam_out} \
         VALIDATION_STRINGENCY=LENIENT) 2> {log}
         """
 
