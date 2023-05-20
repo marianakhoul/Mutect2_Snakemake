@@ -4,7 +4,8 @@ configfile: "config/config.yaml"
 rule all:
     input:
         expand("results/GetPileupSummaries/{tumor}/pileup_summaries.table",tumor=config["base_file_name"])
-      
+
+
 rule GetPileupSummaries:
     input:
         filepaths = lambda wildcards: config["base_file_name"][wildcards.tumor]
