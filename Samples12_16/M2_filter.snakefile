@@ -14,7 +14,7 @@ rule GetPileupSummaries:
         gatk = config["gatk_path"],
         variants_for_contamination = config["variants_for_contamination"]
     log:
-        expand("logs/GetPileupSummaries/{tumors}_get_pileup_summaries.txt",tumor=config["base_file_name"])
+        expand("logs/GetPileupSummaries/{tumor}_get_pileup_summaries.txt",tumor=config["base_file_name"])
     shell:
         "({params.gatk} GetPileupSummaries \
         -I {input.filepaths} \
