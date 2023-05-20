@@ -37,7 +37,8 @@ rule MergeBamOuts:
     params:
         reference_genome = config["reference_genome"],
         java = config["java"],
-	picard_jar = config["picard_jar"]
+	picard_jar = config["picard_jar"],
+	chromosomes=config["chromosomes"]
     log:
         "logs/MergeBamOuts/{tumor}/MergeBamOuts.log"
     shell:
