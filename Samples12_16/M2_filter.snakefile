@@ -3,7 +3,6 @@ configfile: "config/config.yaml"
 
 rule all:
     input:
-        #expand("results/GetPileupSummaries/{tumor}/pileup_summaries_{chromosomes}.table",tumor=config["base_file_name"],chromosomes=config["chromosomes"]),
 	expand("results/MergeBamOuts/{tumor}/unsorted.out.bam",tumor=config["normals"]),
 	expand("results/MergeBamOuts/{tumor}/bamout.bam",tumor=config["normals"])
 	
