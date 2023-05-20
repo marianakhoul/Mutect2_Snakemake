@@ -3,11 +3,11 @@ configfile: "config/config.yaml"
 
 rule all:
 	input:
-		expand("results/GatherPileupSummaries/{tumor}/{tumor}.tsv",tumor=config["base_file_name"])
+		expand("results/GatherPileupSummaries/{tumor}/{tumor}.table",tumor=config["base_file_name"])
 
 rule GatherPileupSummaries:
 	output:
-		"results/GatherPileupSummaries/{tumor}/{tumor}.tsv"
+		"results/GatherPileupSummaries/{tumor}/{tumor}.table"
 	params:
 		reference_dict = config["reference_dict"],
 		gatk = config["gatk_path"]
@@ -21,7 +21,7 @@ rule GatherPileupSummaries:
 		({params.gatk} GatherPileupSummaries \
 		--sequence-dictionary {params.reference_dict} \
 		$all_pileup_inputs \
-		-O {outputs}) 2> {log}
+		-O {output}) 2> {log}
 		"""
 		
 	
