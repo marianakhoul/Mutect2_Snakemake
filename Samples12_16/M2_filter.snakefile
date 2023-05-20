@@ -34,18 +34,18 @@ rule MergeBamOuts:
     params:
         reference_genome = config["reference_genome"],
         java = config["java"],
-		picard_jar = config["picard_jar"]
+	picard_jar = config["picard_jar"]
     log:
         "logs/MergeBamOuts/{tumor}/MergeBamOuts.log"
     shell:
         """
-		all_bamout_inputs=`for chrom in {params.chromosomes}; do
-		printf -- "I=results/mutect2/{wildcards.base_file_name}/{wildcards.base_file_name}_{wildcards.chromosomes}_bamout.bam "; done`
+	all_bamout_inputs=`for chrom in {params.chromosomes}; do
+	printf -- "I=results/mutect2/{wildcards.base_file_name}/{wildcards.base_file_name}_{wildcards.chromosomes}_bamout.bam "; done`
 	
-		({params.java} -jar {params.picard_jar} GatherBamFiles \
+	({params.java} -jar {params.picard_jar} GatherBamFiles \
         R={params.reference_genome} \
-		$all_vcf_inputs \
-		O={output.unsorted_output}
+	$all_vcf_inputs \
+	O={output.unsorted_output}
 
         {params.java} -jar {params.picard_jar} SortSam \
         I={output.unsorted_output}
