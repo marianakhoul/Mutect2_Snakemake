@@ -3,7 +3,7 @@ configfile: "config/config.yaml"
 
 rule all:
     input:
-        expand("results/{tumor}/pileup_summaries.table",tumor=config["base_file_name"])
+        expand("results/GetPileupSummaries/{tumor}/pileup_summaries.table",tumor=config["base_file_name"])
       
 rule GetPileupSummaries:
     input:
