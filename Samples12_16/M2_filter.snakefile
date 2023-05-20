@@ -4,7 +4,7 @@ configfile: "config/config.yaml"
 rule all:
     input:
 	expand("results/MergeBamOuts/{tumor}/unsorted.out.bam",tumor=config["normals"]),
-	xpand("results/MergeBamOuts/{tumor}/bamout.bam",tumor=config["normals"])
+	expand("results/MergeBamOuts/{tumor}/bamout.bam",tumor=config["normals"])
 	
 
 #rule GatherGetPileupSummaries:
