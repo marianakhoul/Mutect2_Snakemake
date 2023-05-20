@@ -28,7 +28,17 @@ rule MergeBamOuts:
 	({params.java} -jar {params.picard_jar} GatherBamFiles \
         R={params.reference_genome} \
 	$all_bamout_inputs \
-	O={output.unsorted_output}) 2> {log}
+	O={output.unsorted_output}
+	
+	{params.java} -jar {params.picard_jar} SortSam \
+	I={output.unsorted_output} \
+	O={output.bam_out} \
+	SORT_ORDER=coordinate \
+	VALIDATION_STRINGENCY=LENIENT
+	
+	{params.java} -jar {params.picard_jar} BuildBamIndex \
+	I={output.bam_out} \
+	VALIDATION_STRINGENCY=LENIENT) 2> {log}
         """
 
     
