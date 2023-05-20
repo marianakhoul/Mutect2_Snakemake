@@ -25,3 +25,7 @@ rule GetPileupSummaries:
         -L {wildcards.chromosomes} \
         -O {output}) 2> {log}"
 
+rule GatherGetPileupSummaries:
+    output:
+        
+    
