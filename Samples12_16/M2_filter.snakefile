@@ -2,9 +2,9 @@ configfile: "config/samples_getpileup.yaml"
 configfile: "config/config.yaml" 
 
 rule all:
-    input:
-	expand("results/MergeBamOuts/{tumor}/unsorted.out.bam",tumor=config["normals"]),
-	expand("results/MergeBamOuts/{tumor}/bamout.bam",tumor=config["normals"])
+	input:
+		expand("results/MergeBamOuts/{tumor}/unsorted.out.bam",tumor=config["normals"]),
+		expand("results/MergeBamOuts/{tumor}/bamout.bam",tumor=config["normals"])
 	
 
 #rule GatherGetPileupSummaries:
