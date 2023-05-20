@@ -27,7 +27,7 @@ rule MergeBamOuts:
 	
 	({params.java} -jar {params.picard_jar} GatherBamFiles \
         R={params.reference_genome} \
-	$all_vcf_inputs \
+	$all_bamout_inputs \
 	O={output.unsorted_output}
 
         {params.java} -jar {params.picard_jar} SortSam \
