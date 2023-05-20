@@ -10,7 +10,7 @@ rule GetPileupSummaries:
     input:
         filepaths = lambda wildcards: config["base_file_name"][wildcards.tumor]
     output:
-        expand("results/GetPileupSummaries/{tumor}/pileup_summaries.table",tumor=config["base_file_name"])
+        "results/GetPileupSummaries/{tumor}/pileup_summaries.table"
     params:
         reference_genome = config["reference_genome"],
         gatk = config["gatk_path"],
