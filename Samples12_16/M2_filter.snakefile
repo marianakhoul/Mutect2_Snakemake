@@ -29,7 +29,7 @@ rule GetPileupSummaries:
 #    output:
 rule MergeBamOuts:
     output:
-        unsorted_output = "results/MergeBamOuts/{tumor}/unsorted.out.bam"
+        unsorted_output = "results/MergeBamOuts/{tumor}/unsorted.out.bam",
         bam_out = "results/MergeBamOuts/{tumor}/bamout.bam"
     params:
         reference_genome = config["reference_genome"],
