@@ -10,7 +10,8 @@ rule GatherPileupSummaries:
 		"results/GatherPileupSummaries/{tumor}/{tumor}.table"
 	params:
 		reference_dict = config["reference_dict"],
-		gatk = config["gatk_path"]
+		gatk = config["gatk_path"],
+		chromosomes=config["chromosomes"]
 	log:
 		"logs/GatherPileupSummaries/{tumor}.log"
 	shell:
