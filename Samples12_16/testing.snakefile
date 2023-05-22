@@ -60,7 +60,7 @@ rule MergeBamOuts:
 		
 		{params.java} -jar {params.picard_jar} BuildBamIndex \
 		I={output.bam_out} \
-		O={output.bam_bai} \ 
+		O={output.bam_bai} \
 		VALIDATION_STRINGENCY=LENIENT) 2> {log}
 		"""
 
