@@ -2,7 +2,7 @@
 
 base_file_name: 
   DTRCC_12: /home/mi724/Tools/Mutect2_Snakemake/Samples12_16/Sample12Tumorbam.list
-  DTRCC_12_Blood2: /home/mi724/Tools/Mutect2_Snakemake/Samples12_16/Sample12Normalbam.list
+  DTRCC_12_Blood: /home/mi724/Tools/Mutect2_Snakemake/Samples12_16/Sample12Normalbam.list
 
 normals:
   DTRCC_12: DTRCC_12_Blood
