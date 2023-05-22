@@ -4,8 +4,7 @@ configfile: "config/config.yaml"
 import glob
 import re
 def getFullPathToFile(base, filepath):
-	print(filepath)
-	print(base)
+	print(glob.glob(''.join([filepath, base, "/", base, ".table"])))
 	return glob.glob(''.join([filepath, base, "/", base, ".table"]))
 
 
@@ -56,8 +55,8 @@ rule GatherPileupSummaries:
 	
 rule CalculateContamination:
 	input:
-		tumor_pileup=lambda wildcards: getFullPathToFile(config["normals"][wildcards.tumor][0], "results/GatherPileupSummaries/"),
-		normal_pileup=lambda wildcards: getFullPathToFile(config["normals"][wildcards.tumor][1], "results/GatherPileupSummaries/")
+		tumor_pileup=lambda wildcards: getFullPathToFile(config["normals"], "results/GatherPileupSummaries/"),
+		normal_pileup=lambda wildcards: getFullPathToFile(config["normals"][wildcards.tumor], "results/GatherPileupSummaries/")
 	output:
 		"results/GatherPileupSummaries/{tumor}/{tumor}_contamination.table"
 	params:
