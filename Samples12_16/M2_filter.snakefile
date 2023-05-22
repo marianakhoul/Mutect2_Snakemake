@@ -55,7 +55,7 @@ rule GatherPileupSummaries:
 	
 rule CalculateContamination:
 	input:
-		tumor_pileup=lambda wildcards: getFullPathToFile(config["normals"], "results/GatherPileupSummaries/"),
+		tumor_pileup=lambda wildcards: getFullPathToFile(config["normals"][wildcards.tumor], "results/GatherPileupSummaries/"),
 		normal_pileup=lambda wildcards: getFullPathToFile(config["normals"][wildcards.tumor], "results/GatherPileupSummaries/")
 	output:
 		"results/GatherPileupSummaries/{tumor}/{tumor}_contamination.table"
