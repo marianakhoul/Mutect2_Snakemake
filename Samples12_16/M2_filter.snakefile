@@ -4,7 +4,8 @@ configfile: "config/config.yaml"
 rule all:
 	input:
 		expand("results/GetPileupSummaries/{tumor}/pileup_summaries_{chromosomes}.table",tumor=config["base_file_name"],chromosomes=config["chromosomes"]),
-    		expand("results/GatherPileupSummaries/{tumor}/{tumor}.table",tumor=config["base_file_name"])
+    		expand("results/GatherPileupSummaries/{tumor}/{tumor}.table",tumor=config["base_file_name"]),
+		expand("results/GatherPileupSummaries/{tumor}/{tumor}_contamination.table",tumor=config["normals"])
 
 rule GetPileupSummaries:
 	input:
@@ -44,3 +45,19 @@ rule GatherPileupSummaries:
 		$all_pileup_inputs \
 		-O {output}) 2> {log}
 		"""
+	
+rule CalculateContamination:
+	input:
+		tumor_pileup = "results/GatherPileupSummaries/{tumor}/{tumor}.table",
+		normal_pileup = "results/GatherPileupSummaries/{tumor}/{tumor}.table"
+	output:
+		"results/GatherPileupSummaries/{tumor}/{tumor}_contamination.table"
+	params:
+		gatk = config["gatk_path"]
+	log:
+		"logs/CalculateContamination/"
+	shell:
+		"({params.gatk} CalculateContamination \
+   		-I {input.tumor_pileup} \
+   		-matched {input.normal_pileup} \
+   		-O {output}) 2> {log}"
