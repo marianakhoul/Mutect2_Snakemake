@@ -28,7 +28,6 @@ rule GetPileupSummaries:
 		-L {wildcards.chromosomes} \
 		-O {output}) 2> {log}"
 
-
 rule MergeBamOuts:
 	output:
 		unsorted_output = "results/MergeBamOuts/{tumor}/unsorted.out.bam",
