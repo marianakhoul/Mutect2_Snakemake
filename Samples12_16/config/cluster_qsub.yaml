@@ -11,3 +11,10 @@ MergeBamOuts:
     h_rt:   300:0:0
     pe: smp 8
     binding:    linear:1
+
+GetPileupSummaries:
+    q:  broad
+    h_vmem: 30G
+    h_rt:   300:0:0
+    pe: smp 8
+    binding:    linear:1
