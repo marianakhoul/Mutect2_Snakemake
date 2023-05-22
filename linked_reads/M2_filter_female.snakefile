@@ -1,5 +1,5 @@
 configfile: "config/samples_female.yaml"
-configfile: "config/config.yaml" 
+configfile: "config/config_female.yaml" 
 
 rule all:
     input:
