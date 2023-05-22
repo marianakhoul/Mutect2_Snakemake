@@ -4,7 +4,8 @@ configfile: "config/config.yaml"
 import glob
 import re
 def getFullPathToFile(base, filepath):
-	print(glob.glob(''.join([filepath, base, "/", base, ".table"])))
+	print(filepath)
+	print(base)
 	return glob.glob(''.join([filepath, base, "/", base, ".table"]))
 
 
