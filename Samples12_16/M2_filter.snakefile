@@ -3,28 +3,23 @@ configfile: "config/config.yaml"
 
 rule all:
 	input:
-		expand("results/GatherPileupSummaries/{tumor}/{tumor}.table",tumor=config["base_file_name"])
+		expand("results/GetPileupSummaries/{tumor}/pileup_summaries_{chromosomes}.table",tumor=config["base_file_name"],chromosomes=config["chromosomes"])
 
-rule GatherPileupSummaries:
+rule GetPileupSummaries:
+	input:
+		filepaths = lambda wildcards: config["base_file_name"][wildcards.tumor]
 	output:
-		"results/GatherPileupSummaries/{tumor}/{tumor}.table"
+		"results/GetPileupSummaries/{tumor}/pileup_summaries_{chromosomes}.table"
 	params:
-		reference_dict = config["reference_dict"],
+		reference_genome = config["reference_genome"],
 		gatk = config["gatk_path"],
-		chromosomes=config["chromosomes"]
+		variants_for_contamination = config["variants_for_contamination"]
 	log:
-		"logs/GatherPileupSummaries/{tumor}.log"
+		"logs/GetPileupSummaries/{tumor}_get_pileup_summaries_{chromosomes}.txt"
 	shell:
-		"""
-		all_pileup_inputs=`for chrom in {params.chromosomes}; do
-		printf -- "-I results/GetPileupSummaries/{wildcards.tumor}/pileup_summaries_${{chrom}}.table "; done`
-		
-		({params.gatk} GatherPileupSummaries \
-		--sequence-dictionary {params.reference_dict} \
-		$all_pileup_inputs \
-		-O {output}) 2> {log}
-		"""
-		
-	
-
-    
+		"({params.gatk} GetPileupSummaries \
+		-R {params.reference_genome} \
+		-I {input.filepaths} \
+		-V {params.variants_for_contamination} \
+		-L {wildcards.chromosomes} \
+		-O {output}) 2> {log}"
