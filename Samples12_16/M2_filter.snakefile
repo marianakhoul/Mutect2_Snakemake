@@ -61,7 +61,7 @@ rule CalculateContamination:
 	params:
 		gatk = config["gatk_path"]
 	log:
-		"logs/CalculateContamination/"
+		"logs/CalculateContamination/{tumor}/{tumor}_contamination.log"
 	shell:
 		"({params.gatk} CalculateContamination \
    		-I {input.tumor_pileup} \
