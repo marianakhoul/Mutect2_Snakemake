@@ -16,7 +16,7 @@ rule all:
 		expand("results/CalculateContamination/{tumor}/{tumor}.segments.table",tumor=config["normals"]),
 		expand("results/FilterMutectCalls/{tumor}/filtered_all.vcf.gz",tumor=config["normals"]),
 		expand("results/FilterMutectCalls/{tumor}/filtering_stats.tsv",tumor=config["normals"]),
-		expand("results/SelectVariantsForFilterMutectCalls/{tumor}/filtered.vcf.gz",tumor=config["normals"])
+		expand("results/FilterMutectCalls/{tumor}/filtered.vcf.gz",tumor=config["normals"])
 
 rule GetPileupSummaries:
 	input:
@@ -107,7 +107,7 @@ rule SelectVariantsForFilterMutectCalls:
 	input:
 		filtered_all="results/FilterMutectCalls/{tumor}/filtered_all.vcf.gz"
 	output:
-		filtered_vcf="results/SelectVariantsForFilterMutectCalls/{tumor}/filtered.vcf.gz"
+		filtered_vcf="results/FilterMutectCalls/{tumor}/filtered.vcf.gz"
 	params:
 		gatk = config["gatk_path"],
 		reference_genome = config["reference_genome"],
