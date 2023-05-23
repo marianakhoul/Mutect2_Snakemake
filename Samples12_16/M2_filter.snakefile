@@ -12,8 +12,10 @@ rule all:
 	input:
 		expand("results/GetPileupSummaries/{tumor}/pileup_summaries_{chromosomes}.table",tumor=config["base_file_name"],chromosomes=config["chromosomes"]),
     		expand("results/GatherPileupSummaries/{tumor}/{tumor}.table",tumor=config["base_file_name"]),
-		expand("results/GatherPileupSummaries/{tumor}/{tumor}_contamination.table",tumor=config["normals"]),
-		expand("results/GatherPileupSummaries/{tumor}/{tumor}.segments.table",tumor=config["normals"])
+		expand("results/CalculateContamination/{tumor}/{tumor}_contamination.table",tumor=config["normals"]),
+		expand("results/CalculateContamination/{tumor}/{tumor}.segments.table",tumor=config["normals"]),
+		expand("results/FilterMutectCalls/{tumors}/filtered_all.vcf.gz",tumor=config["normals"]),
+		expand("results/FilterMutectCalls/{tumors}/filtering_stats.tsv",tumor=config["normals"])
 
 rule GetPileupSummaries:
 	input:
@@ -72,3 +74,30 @@ rule CalculateContamination:
    		-matched {input.normal_pileup} \
 		--tumor-segmentation {output.tumor_segmentation} \
    		-O {output.contamination_table}) 2> {log}"
+
+rule FilterMutectCalls:
+	input:
+		unfiltered_vcf = "results/GatherVcfs/{tumors}/gathered_unfiltered.vcf.gz",
+		vcf_index = "results/GatherVcfs/{tumors}/gathered_unfiltered.vcf.gz.tbi",
+		segments_table = "results/CalculateContamination/{tumors}/{tumors}.segments.table",
+		contamination_table = "results/CalculateContamination/{tumors}/{tumors}_contamination.table",
+		read_orientation_model = "results/LearnReadOrientationModel/{tumors}/read_orientation_model.tar.gz",
+		mutect_stats = "results/MergeMutectStats/{tumors}/mutect_merged.stats"
+	output:
+		filtered_vcf = "results/FilterMutectCalls/{tumors}/filtered_all.vcf.gz",
+		filtering_stats = "results/FilterMutectCalls/{tumors}/filtering_stats.tsv"
+	params:
+		gatk = config["gatk"],
+		reference_genome = config["reference_genome"]
+	log:
+		"logs/FilterMutectCalls/{tumors}_filter_mutect_calls.txt"
+	shell:
+		"({params.gatk} FilterMutectCalls \
+		-R {params.reference_genome} \
+		-V {input.unfiltered_vcf} \
+		--tumor-segmentation {input.segments_table} \
+		--contamination-table {input.contamination_table} \
+		--ob-priors {input.read_orientation_model} \
+		--stats {input.mutect_stats} \
+		--filtering-stats {output.filtering_stats} \
+		-O {output.filtered_vcf}) 2> {log}"
