@@ -12,7 +12,8 @@ rule all:
 	input:
 		expand("results/GetPileupSummaries/{tumor}/pileup_summaries_{chromosomes}.table",tumor=config["base_file_name"],chromosomes=config["chromosomes"]),
     		expand("results/GatherPileupSummaries/{tumor}/{tumor}.table",tumor=config["base_file_name"]),
-		expand("results/GatherPileupSummaries/{tumor}/{tumor}_contamination.table",tumor=config["normals"])
+		expand("results/GatherPileupSummaries/{tumor}/{tumor}_contamination.table",tumor=config["normals"]),
+		expand("results/GatherPileupSummaries/{tumor}/{tumor}.segments.table",tumor=config["normals"])
 
 rule GetPileupSummaries:
 	input:
