@@ -165,7 +165,7 @@ rule MergeBamOuts:
 
 rule FilterAlignmentArtifacts:
 	input:
-		filtered_vcf="results/FilterMutectCalls/{tumor}/filtered.vcf.gz"
+		filtered_vcf="results/FilterMutectCalls/{tumor}/filtered.vcf.gz",
 		mergedBamout="results/MergeBamOuts/{tumor}/bamout.bam"
 	output:
 		filtered_vcf="results/FilterAlignmentArtifacts/{tumor}/{tumor}_filtered.realigned.vcf.gz"
