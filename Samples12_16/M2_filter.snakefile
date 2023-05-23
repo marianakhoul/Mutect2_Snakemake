@@ -19,7 +19,10 @@ rule all:
 		expand("results/FilterMutectCalls/{tumor}/filtered.vcf.gz",tumor=config["normals"]),
 		expand("results/MergeBamOuts/{tumor}/unsorted.out.bam",tumor=config["normals"]),
 		expand("results/MergeBamOuts/{tumor}/bamout.bam",tumor=config["normals"]),
-		expand("results/MergeBamOuts/{tumor}/bamout.bai",tumor=config["normals"])
+		expand("results/MergeBamOuts/{tumor}/bamout.bai",tumor=config["normals"]),
+		expand("results/FilterAlignmentArtifacts/{tumor}/{tumor}_filtered.realigned.vcf.gz",tumor=config["normals"]),
+		expand("results/FilterAlignmentArtifacts/{tumor}/{tumor}.final.vcf.gz",tumor=config["normals"])
+
 
 rule GetPileupSummaries:
 	input:
@@ -158,3 +161,44 @@ rule MergeBamOuts:
 		I={output.bam_out} \
 		O={output.bam_bai} \ 
 		VALIDATION_STRINGENCY=LENIENT) 2> {log}"""
+
+
+rule FilterAlignmentArtifacts:
+	input:
+		filtered_vcf="results/FilterMutectCalls/{tumor}/filtered.vcf.gz"
+		mergedBamout="results/MergeBamOuts/{tumor}/bamout.bam"
+	output:
+		filtered_vcf="results/FilterAlignmentArtifacts/{tumor}/{tumor}_filtered.realigned.vcf.gz"
+	params:
+		gatk = config["gatk_path"],
+		reference_genome = config["reference_genome"],
+		realignment_index_bundle=config["realignment_index_bundle"]
+	log:
+		"logs/FilterAlignmentArtifacts/{tumor}/FilterAlignmentArtifacts.txt"
+	shell:
+		"({params.gatk} FilterAlignmentArtifacts \
+		-R {params.reference_genome} \
+		-V {input.filtered_vcf} \
+		-I {input.mergedBamout} \
+		--bwa-mem-index-image {params.realignment_index_bundle} \
+		-O {output.filtered_vcf}) 2> {log}"
+
+rule SelectVariantsForFilterAlignmentArtifacts:
+	input:
+		filtered_vcf="results/FilterAlignmentArtifacts/{tumor}/{tumor}_filtered.realigned.vcf.gz"
+	output:
+		final_vcf="results/FilterAlignmentArtifacts/{tumor}/{tumor}.final.vcf.gz"
+	params:
+		gatk = config["gatk_path"],
+		reference_genome = config["reference_genome"],
+		cytoBand_list=config["cytoBand_list"]
+	log:
+		"logs/SelectVariantsForFilterAlignmentArtifacts/{tumor}/SelectVariantsForFilterAlignmentArtifacts.txt"
+	shell:
+		"({params.gatk} SelectVariants \
+		-R {params.reference_genome} \
+		-XL {params.cytoBand_list}\
+		-V {input.filtered_vcf} \
+		-O {output.final_vcf} \
+		--exclude-filtered) 2> {log}"
+
