@@ -113,12 +113,12 @@ rule SelectVariantsForFilterMutectCalls:
 		reference_genome = config["reference_genome"],
 		interval_list = config["interval_list"]
 	log:
-		"logs/SelectVariantsForFilterMutectCalls/{tumor}/{tumor}_SelectVariantsForFilterMutectCalls.txt"
+		"logs/FilterMutectCalls/{tumor}/SelectVariantsForFilterMutectCalls.txt"
 	shell:
 		"({params.gatk} SelectVariants \
 		-R {params.reference_genome} \
 		-L {params.interval_list}\
 		-V {input.filtered_all} \
 		-O {output.filtered_vcf} \
-		--exclude-filtered 2> {log}"
+		--exclude-filtered) 2> {log}"
 
