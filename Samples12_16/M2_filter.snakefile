@@ -87,7 +87,7 @@ rule FilterMutectCalls:
 		filtered_vcf = "results/FilterMutectCalls/{tumor}/filtered_all.vcf.gz",
 		filtering_stats = "results/FilterMutectCalls/{tumor}/filtering_stats.tsv"
 	params:
-		gatk = config["gatk"],
+		gatk = config["gatk_path"],
 		reference_genome = config["reference_genome"]
 	log:
 		"logs/FilterMutectCalls/{tumors}_filter_mutect_calls.txt"
