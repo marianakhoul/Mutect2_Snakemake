@@ -14,8 +14,8 @@ rule all:
     		expand("results/GatherPileupSummaries/{tumor}/{tumor}.table",tumor=config["base_file_name"]),
 		expand("results/CalculateContamination/{tumor}/{tumor}_contamination.table",tumor=config["normals"]),
 		expand("results/CalculateContamination/{tumor}/{tumor}.segments.table",tumor=config["normals"]),
-		expand("results/FilterMutectCalls/{tumors}/filtered_all.vcf.gz",tumor=config["normals"]),
-		expand("results/FilterMutectCalls/{tumors}/filtering_stats.tsv",tumor=config["normals"])
+		expand("results/FilterMutectCalls/{tumor}/filtered_all.vcf.gz",tumor=config["normals"]),
+		expand("results/FilterMutectCalls/{tumor}/filtering_stats.tsv",tumor=config["normals"])
 
 rule GetPileupSummaries:
 	input:
@@ -77,15 +77,15 @@ rule CalculateContamination:
 
 rule FilterMutectCalls:
 	input:
-		unfiltered_vcf = "results/GatherVcfs/{tumors}/gathered_unfiltered.vcf.gz",
-		vcf_index = "results/GatherVcfs/{tumors}/gathered_unfiltered.vcf.gz.tbi",
-		segments_table = "results/CalculateContamination/{tumors}/{tumors}.segments.table",
-		contamination_table = "results/CalculateContamination/{tumors}/{tumors}_contamination.table",
-		read_orientation_model = "results/LearnReadOrientationModel/{tumors}/read_orientation_model.tar.gz",
-		mutect_stats = "results/MergeMutectStats/{tumors}/mutect_merged.stats"
+		unfiltered_vcf = "results/GatherVcfs/{tumor}/gathered_unfiltered.vcf.gz",
+		vcf_index = "results/GatherVcfs/{tumor}/gathered_unfiltered.vcf.gz.tbi",
+		segments_table = "results/CalculateContamination/{tumor}/{tumor}.segments.table",
+		contamination_table = "results/CalculateContamination/{tumor}/{tumor}_contamination.table",
+		read_orientation_model = "results/LearnReadOrientationModel/{tumor}/read_orientation_model.tar.gz",
+		mutect_stats = "results/MergeMutectStats/{tumor}/mutect_merged.stats"
 	output:
-		filtered_vcf = "results/FilterMutectCalls/{tumors}/filtered_all.vcf.gz",
-		filtering_stats = "results/FilterMutectCalls/{tumors}/filtering_stats.tsv"
+		filtered_vcf = "results/FilterMutectCalls/{tumor}/filtered_all.vcf.gz",
+		filtering_stats = "results/FilterMutectCalls/{tumor}/filtering_stats.tsv"
 	params:
 		gatk = config["gatk"],
 		reference_genome = config["reference_genome"]
