@@ -90,7 +90,7 @@ rule FilterMutectCalls:
 		gatk = config["gatk_path"],
 		reference_genome = config["reference_genome"]
 	log:
-		"logs/FilterMutectCalls/{tumors}_filter_mutect_calls.txt"
+		"logs/FilterMutectCalls/{tumor}/{tumor}_filter_mutect_calls.txt"
 	shell:
 		"({params.gatk} FilterMutectCalls \
 		-R {params.reference_genome} \
