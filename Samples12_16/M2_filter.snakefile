@@ -101,3 +101,23 @@ rule FilterMutectCalls:
 		--stats {input.mutect_stats} \
 		--filtering-stats {output.filtering_stats} \
 		-O {output.filtered_vcf}) 2> {log}"
+
+rule SelectVariantsForFilterMutectCalls:
+	input:
+		filtered_all="results/FilterMutectCalls/{tumor}/filtered_all.vcf.gz"
+	output:
+		filtered_vcf="results/SelectVariantsForFilterMutectCalls/{tumor}/filtered.vcf.gz"
+	params:
+		gatk = config["gatk_path"],
+		reference_genome = config["reference_genome"],
+		interval_list = config["interval_list"]
+	log:
+		"logs/SelectVariantsForFilterMutectCalls/{tumor}/{tumor}_SelectVariantsForFilterMutectCalls.txt"
+	shell:
+		"({params.gatk} SelectVariants \
+		-R {params.reference_genome} \
+		-L  {params.interval_list}\
+		-V {input.filtered_all} \
+		-O {output.filtered_vcf} \
+		--exclude-filtered 2> {log}"
+
