@@ -1,8 +1,8 @@
 #samples.yaml for M2_filter.snakefile
 
 base_file_name: 
-  B_TRCC_18_Tumor: /home/mi724/Tools/Snakemake/Mutect2/Tumorbam.list
-  B_TRCC_18_Normal: /home/mi724/Tools/Snakemake/Mutect2/Normalbam.list
+  B_TRCC_18_Tumor: /home/mi724/Tools/Mutect2_Snakemake/Tumorbam.list
+  B_TRCC_18_Normal: /home/mi724/Tools/Mutect2_Snakemake/Normalbam.list
 
 normals:
   B_TRCC_18_Tumor: B_TRCC_18_Normal
