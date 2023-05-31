@@ -1,8 +1,8 @@
 __default__:
     q:  broad
-    h_vmem: 20G
-    h_rt:   100:0:0
-    pe: smp 4
+    h_vmem: 40G
+    h_rt:   300:0:0
+    pe: smp 6
     binding:    linear:1
 
 LearnReadOrientationModel:
