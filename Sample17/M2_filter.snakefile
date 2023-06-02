@@ -11,7 +11,7 @@ def getFullPathToFile(base, filepath):
 rule all:
 	input:
 		expand("results/GetPileupSummaries/{tumor}/pileup_summaries_{chromosomes}.table",tumor=config["base_file_name"],chromosomes=config["chromosomes"]),
-    expand("results/GatherPileupSummaries/{tumor}/{tumor}.table",tumor=config["base_file_name"]),
+		expand("results/GatherPileupSummaries/{tumor}/{tumor}.table",tumor=config["base_file_name"]),
 		expand("results/CalculateContamination/{tumor}/{tumor}_contamination.table",tumor=config["normals"]),
 		expand("results/CalculateContamination/{tumor}/{tumor}.segments.table",tumor=config["normals"]),
 		expand("results/FilterMutectCalls/{tumor}/filtered_all.vcf.gz",tumor=config["normals"]),
