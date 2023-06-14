@@ -1,5 +1,5 @@
-configfile: "config/samples.yaml"
-configfile: "config/config.yaml" 
+configfile: "config/samples_female.yaml"
+configfile: "config/config_female.yaml" 
 
 m2_extra_args=config["m2_extra_args"]
 	
@@ -153,8 +153,7 @@ rule LearnReadOrientationModel:
 		chr20_tar = "results/mutect2/{base_file_name}/unfiltered_chr20_f1r2.tar.gz",
 		chr21_tar = "results/mutect2/{base_file_name}/unfiltered_chr21_f1r2.tar.gz",
 		chr22_tar = "results/mutect2/{base_file_name}/unfiltered_chr22_f1r2.tar.gz",
-		chrX_tar = "results/mutect2/{base_file_name}/unfiltered_chrX_f1r2.tar.gz",
-		chrY_tar = "results/mutect2/{base_file_name}/unfiltered_chrY_f1r2.tar.gz"
+		chrX_tar = "results/mutect2/{base_file_name}/unfiltered_chrX_f1r2.tar.gz"
 	output:
 		"results/LearnReadOrientationModel/{base_file_name}/read_orientation_model.tar.gz"
 	params:
@@ -186,7 +185,6 @@ rule LearnReadOrientationModel:
 		-I {input.chr21_tar} \
 		-I {input.chr22_tar} \
 		-I {input.chrX_tar} \
-		-I {input.chrY_tar} \
 		-O {output}) 2> {log}"
 
 rule IndexFeatureFile:
