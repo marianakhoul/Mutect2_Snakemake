@@ -19,7 +19,8 @@ rule all:
 if m2_extra_args == True:
 	rule mutect2:
 		input:
-			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
+			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor],
+			norm_filepath=lambda wildcards: config["base_file_name"][config["normals"][wildcards.tumor]]
 		output:
 			vcf = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz"),
 			tbi = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi"),
@@ -40,6 +41,7 @@ if m2_extra_args == True:
 			"({params.gatk} Mutect2 \
 			-reference {params.reference_genome} \
 			-input {input.tumor_filepath} \
+			-input {input.norm_filepath} \
 			-normal {params.normals} \
 			-intervals {wildcards.chromosomes} \
 			--germline-resource {params.germline_resource} \
@@ -65,7 +67,8 @@ if m2_extra_args == True:
 else:
 	rule mutect2:
 		input:
-			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
+			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor],
+			norm_filepath=lambda wildcards: config["base_file_name"][config["normals"][wildcards.tumor]]
 		output:
 			vcf = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz"),
 			tbi = temp("results/mutect2/{base_file_name}/unfiltered_{chromosomes}.vcf.gz.tbi"),
@@ -85,6 +88,7 @@ else:
         		"({params.gatk} Mutect2 \
 			-reference {params.reference_genome} \
 			-input {input.tumor_filepath} \
+			-input {input.norm_filepath} \
 			-normal {params.normals} \
 			-intervals {wildcards.chromosomes} \
 			--germline-resource {params.germline_resource} \
