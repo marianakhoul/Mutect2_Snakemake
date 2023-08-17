@@ -24,7 +24,7 @@ rule mutect2:
         		"""
 touch {output.vcf}
 
-({params.gatk} Mutect2 \
+({params.gatk} --java-options "-Xmx32G" Mutect2 \
 -R {params.reference_genome} \
 -I {input.tumor_filepath} \
 --read-filter PassesVendorQualityCheckReadFilter \
