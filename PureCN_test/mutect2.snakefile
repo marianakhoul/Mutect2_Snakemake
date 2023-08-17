@@ -33,7 +33,7 @@ rule mutect2:
 			      --read-filter OverclippedReadFilter \
 			      --filter-too-short 25 \
 			      --read-filter GoodCigarReadFilter \
-			      --read-filter AmbiguousBaseReadFilter 
+			      --read-filter AmbiguousBaseReadFilter \
 			      --native-pair-hmm-threads 2 \
 			      --seconds-between-progress-updates 100 \
 			      --genotype-germline-sites true \
