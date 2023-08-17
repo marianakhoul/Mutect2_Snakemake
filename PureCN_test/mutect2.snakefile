@@ -4,6 +4,8 @@ configfile: "config/config.yaml"
 
 rule all:
 	input:
+		expand("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz",tumor=config["normals"]),
+		expand("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz.tbi",tumor=config["normals"])
 
 rule mutect2:
   input:
@@ -19,7 +21,7 @@ rule mutect2:
   log:
 			"logs/mutect2/{tumor}_{chromosomes}_mutect2.txt"
   shell:
-        		"({params.gatk} Mutect2 \
+        		"""({params.gatk} Mutect2 \
 			      -reference {params.reference_genome} \
 			      -input {input.tumor_filepath} \
 			      --read-filter PassesVendorQualityCheckReadFilter \
@@ -39,4 +41,4 @@ rule mutect2:
 			      --interval-padding 100 \
 			      --germline-resource {params.germline_resource} \
 			      --panel-of-normals {params.panel_of_normals} \
-			      -output {output.vcf}) 2> {log}"
+			      -output {output.vcf}) 2> {log}"""
