@@ -21,7 +21,7 @@ rule mutect2:
   log:
 			"logs/mutect2/{tumor}_mutect2.txt"
   shell:
-        		"""({params.gatk} Mutect2 \
+        		"({params.gatk} Mutect2 \
 			      -reference {params.reference_genome} \
 			      -input {input.tumor_filepath} \
 			      --read-filter PassesVendorQualityCheckReadFilter \
@@ -35,10 +35,10 @@ rule mutect2:
 			      --read-filter GoodCigarReadFilter \
 			      --read-filter AmbiguousBaseReadFilter 
 			      --native-pair-hmm-threads 2 \
-			      --seconds-between-progress-updates 100
+			      --seconds-between-progress-updates 100 \
 			      --genotype-germline-sites true \
 			      --genotype-pon-sites true \
 			      --interval-padding 100 \
 			      --germline-resource {params.germline_resource} \
 			      --panel-of-normals {params.panel_of_normals} \
-			      -output {output.vcf}) 2> {log}"""
+			      -output {output.vcf}) 2> {log}"
