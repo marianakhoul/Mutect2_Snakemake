@@ -42,3 +42,4 @@ rule mutect2:
 			      --germline-resource {params.germline_resource} \
 			      --panel-of-normals {params.panel_of_normals} \
 			      -output {output.vcf}) 2> {log}"
+
