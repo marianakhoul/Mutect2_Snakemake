@@ -21,7 +21,10 @@ rule mutect2:
   log:
 			"logs/mutect2/{tumor}_mutect2.txt"
   shell:
-        		"({params.gatk} Mutect2 \
+        		"""
+touch {output.vcf}
+
+({params.gatk} Mutect2 \
 -R {params.reference_genome} \
 -I {input.tumor_filepath} \
 --read-filter PassesVendorQualityCheckReadFilter \
@@ -41,5 +44,5 @@ rule mutect2:
 --interval-padding 100 \
 --germline-resource {params.germline_resource} \
 --panel-of-normals {params.panel_of_normals} \
--O {output.vcf}) 2> {log}"
+-O {output.vcf}) 2> {log}"""
 
