@@ -1,5 +1,5 @@
 #samples.yaml for mutect2.snakefile
-tRCC_15_N  tRCC_17_N  tRCC_36_N  tRCC_58_N  tRCC_70_N
+
 base_file_name: 
   tRCC_26_N: /mnt/scratch/qu_random/cna/tRCC_26_N_hg38_sorted_picard.bam
   tRCC_72_N: /mnt/scratch/qu_random/cna/tRCC_72_N_hg38_sorted_picard.bam
