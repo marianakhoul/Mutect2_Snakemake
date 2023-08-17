@@ -12,12 +12,12 @@ rule mutect2:
 			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
   output:
 			vcf = "results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz",
-			tbi = "results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz.tbi",
+			tbi = "results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz.tbi"
   params:
 			reference_genome = config["reference_genome"],
 			germline_resource = config["germline_resource"],
 			gatk = config["gatk_path"],
-			panel_of_normals = config["panel_of_normals"],
+			panel_of_normals = config["panel_of_normals"]
   log:
 			"logs/mutect2/{tumor}_mutect2.txt"
   shell:
