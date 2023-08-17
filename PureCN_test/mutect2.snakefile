@@ -16,14 +16,12 @@ rule mutect2:
 			germline_resource = config["germline_resource"],
 			gatk = config["gatk_path"],
 			panel_of_normals = config["panel_of_normals"],
-			normals = lambda wildcards: config["normals"][wildcards.tumor]
   log:
 			"logs/mutect2/{tumor}_{chromosomes}_mutect2.txt"
   shell:
         		"({params.gatk} Mutect2 \
 			      -reference {params.reference_genome} \
 			      -input {input.tumor_filepath} \
-			      -normal {params.normals} \
 			      --read-filter PassesVendorQualityCheckReadFilter \
 			      --read-filter HasReadGroupReadFilter \
 			      --read-filter NotDuplicateReadFilter \ 
