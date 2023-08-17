@@ -1,9 +1,17 @@
 #samples.yaml for mutect2.snakefile
 
 base_file_name: 
-  tRCC_26_N: /mnt/scratch/qu_random/test/tRCC_26_N_hg38_sorted_picard.bam
-  tRCC_72_N: /mnt/scratch/qu_random/test/tRCC_72_N_hg38_sorted_picard.bam
+  #tRCC_26_N: /mnt/scratch/qu_random/test/tRCC_26_N_hg38_sorted_picard.bam
+  #tRCC_72_N: /mnt/scratch/qu_random/test/tRCC_72_N_hg38_sorted_picard.bam
+  tRCC_24_N: /mnt/scratch/qu_random/test/tRCC_24_N_hg38_sorted_picard.bam  
+  tRCC_25_N: /mnt/scratch/qu_random/test/tRCC_25_N_hg38_sorted_picard.bam  
+  tRCC_27_N: /mnt/scratch/qu_random/test/tRCC_27_N_hg38_sorted_picard.bam  
+  tRCC_28_N: /mnt/scratch/qu_random/test/tRCC_28_N_hg38_sorted_picard.bam
 
 normals:
-  tRCC_26_N: tRCC_26_N
-  tRCC_72_N: tRCC_72_N
+  #tRCC_26_N: tRCC_26_N
+  #tRCC_72_N: tRCC_72_N
+  tRCC_24_N: tRCC_24_N
+  tRCC_25_N: tRCC_25_N
+  tRCC_27_N: tRCC_27_N
+  tRCC_28_N: tRCC_28_N
