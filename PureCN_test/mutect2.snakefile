@@ -4,8 +4,8 @@ configfile: "config/config.yaml"
 
 rule all:
 	input:
-		expand("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz",tumor=config["normals"]),
-		expand("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz.tbi",tumor=config["normals"])
+		expand("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz",tumor=config["base_file_name"]),
+		expand("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz.tbi",tumor=config["base_file_name"])
 
 rule mutect2:
   input:
