@@ -21,25 +21,25 @@ rule mutect2:
   log:
 			"logs/mutect2/{tumor}_mutect2.txt"
   shell:
-        		"""({params.gatk} Mutect2 \
-			      -reference {params.reference_genome} \
-			      -input {input.tumor_filepath} \
-			      --read-filter PassesVendorQualityCheckReadFilter \
-			      --read-filter HasReadGroupReadFilter \
-			      --read-filter NotDuplicateReadFilter \ 
-			      --read-filter MappingQualityAvailableReadFilter \
-			      --read-filter MappingQualityReadFilter \
-			      --minimum-mapping-quality 30 \
-			      --read-filter OverclippedReadFilter \
-			      --filter-too-short 25 \
-			      --read-filter GoodCigarReadFilter \
-			      --read-filter AmbiguousBaseReadFilter \
-			      --native-pair-hmm-threads 2 \
-			      --seconds-between-progress-updates 100 \
-			      --genotype-germline-sites true \
-			      --genotype-pon-sites true \
-			      --interval-padding 100 \
-			      --germline-resource {params.germline_resource} \
-			      --panel-of-normals {params.panel_of_normals} \
-			      -output {output.vcf}) 2> {log}"""
+        		"({params.gatk} Mutect2 \
+-R {params.reference_genome} \
+-I {input.tumor_filepath} \
+--read-filter PassesVendorQualityCheckReadFilter \
+--read-filter HasReadGroupReadFilter \
+--read-filter NotDuplicateReadFilter \
+--read-filter MappingQualityAvailableReadFilter \
+--read-filter MappingQualityReadFilter \
+--minimum-mapping-quality 30 \
+--read-filter OverclippedReadFilter \
+--filter-too-short 25 \
+--read-filter GoodCigarReadFilter \
+--read-filter AmbiguousBaseReadFilter \
+--native-pair-hmm-threads 2 \
+--seconds-between-progress-updates 100 \
+--genotype-germline-sites true \
+--genotype-pon-sites true \
+--interval-padding 100 \
+--germline-resource {params.germline_resource} \
+--panel-of-normals {params.panel_of_normals} \
+-O {output.vcf}) 2> {log}"
 
