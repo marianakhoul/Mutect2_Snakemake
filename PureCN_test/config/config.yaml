@@ -1,1 +1,13 @@
+##Config file containing information for the mutect2.snakefile
 
+## Tools Path
+gatk_path: /mnt/storage/apps/gatk-4.3.0.0/gatk
+java: /usr/bin/java
+tabix: /usr/bin/tabix
+picard_jar: /home/ma1111/tools/picard.jar
+
+## Path to reference files
+reference_genome: /mnt/storage/labs/sviswanathan/GATK_ref/Homo_sapiens_assembly38.fasta
+reference_dict: /mnt/storage/labs/sviswanathan/GATK_ref/Homo_sapiens_assembly38.dict
+germline_resource: /mnt/storage/labs/sviswanathan/GATK_ref/cz_ref/hg38_pon/af-only-gnomad.hg38.vcf.gz
+panel_of_normals: /mnt/storage/labs/sviswanathan/GATK_ref/cz_ref/hg38_pon/M2PoN_4.0_WGS_for_public.vcf
