@@ -19,7 +19,7 @@ rule mutect2:
 			gatk = config["gatk_path"],
 			panel_of_normals = config["panel_of_normals"],
   log:
-			"logs/mutect2/{tumor}_{chromosomes}_mutect2.txt"
+			"logs/mutect2/{tumor}_mutect2.txt"
   shell:
         		"""({params.gatk} Mutect2 \
 			      -reference {params.reference_genome} \
