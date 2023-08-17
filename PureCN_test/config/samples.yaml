@@ -1,0 +1,7 @@
+#samples.yaml for mutect2.snakefile
+
+base_file_name: 
+  tRCC_26_N: /mnt/scratch/qu_random/test/tRCC_26_N_hg38_sorted_picard.bam
+
+normals:
+  tRCC_26_N: tRCC_26_N
