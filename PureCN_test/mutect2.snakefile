@@ -25,7 +25,7 @@ rule mutect2:
 mkdir -p results/mutect2/{wildcards.tumor}/
 touch {output.vcf}
 
-({params.gatk} --java-options "-Xmx32G" Mutect2 \
+({params.gatk} --java-options "-Xmx512M" Mutect2 \
 -R {params.reference_genome} \
 -I {input.tumor_filepath} \
 --read-filter PassesVendorQualityCheckReadFilter \
