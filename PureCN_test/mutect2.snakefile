@@ -9,10 +9,8 @@ rule mutect2:
   input:
 			tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
   output:
-			vcf = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz"),
-			tbi = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.tbi"),
-			tar = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}_f1r2.tar.gz"),
-			stats = temp("results/mutect2/{tumor}/unfiltered_{chromosomes}.vcf.gz.stats"),
+			vcf = "results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz",
+			tbi = "results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz.tbi",
   params:
 			reference_genome = config["reference_genome"],
 			germline_resource = config["germline_resource"],
@@ -26,21 +24,21 @@ rule mutect2:
 			      -reference {params.reference_genome} \
 			      -input {input.tumor_filepath} \
 			      -normal {params.normals} \
-            --read-filter PassesVendorQualityCheckReadFilter \
-            --read-filter HasReadGroupReadFilter \
-            --read-filter NotDuplicateReadFilter \ 
-            --read-filter MappingQualityAvailableReadFilter \
-            --read-filter MappingQualityReadFilter \
-            --minimum-mapping-quality 30 \
-            --read-filter OverclippedReadFilter \
-            --filter-too-short 25 \
-            --read-filter GoodCigarReadFilter \
-            --read-filter AmbiguousBaseReadFilter 
-            --native-pair-hmm-threads 2 \
-            --seconds-between-progress-updates 100
-            --genotype-germline-sites true \
-            --genotype-pon-sites true \
-            --interval-padding 100 \
+			      --read-filter PassesVendorQualityCheckReadFilter \
+			      --read-filter HasReadGroupReadFilter \
+			      --read-filter NotDuplicateReadFilter \ 
+			      --read-filter MappingQualityAvailableReadFilter \
+			      --read-filter MappingQualityReadFilter \
+			      --minimum-mapping-quality 30 \
+			      --read-filter OverclippedReadFilter \
+			      --filter-too-short 25 \
+			      --read-filter GoodCigarReadFilter \
+			      --read-filter AmbiguousBaseReadFilter 
+			      --native-pair-hmm-threads 2 \
+			      --seconds-between-progress-updates 100
+			      --genotype-germline-sites true \
+			      --genotype-pon-sites true \
+			      --interval-padding 100 \
 			      --germline-resource {params.germline_resource} \
 			      --panel-of-normals {params.panel_of_normals} \
 			      -output {output.vcf}) 2> {log}"
