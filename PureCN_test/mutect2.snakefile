@@ -22,6 +22,7 @@ rule mutect2:
 			"logs/mutect2/{tumor}_mutect2.txt"
   shell:
         		"""
+mkdir -p results/mutect2/{tumor}/
 touch {output.vcf}
 
 ({params.gatk} --java-options "-Xmx32G" Mutect2 \
