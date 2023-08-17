@@ -1,5 +1,5 @@
 #samples.yaml for mutect2.snakefile
-
+tRCC_15_N  tRCC_17_N  tRCC_36_N  tRCC_58_N  tRCC_70_N
 base_file_name: 
   tRCC_26_N: /mnt/scratch/qu_random/cna/tRCC_26_N_hg38_sorted_picard.bam
   tRCC_72_N: /mnt/scratch/qu_random/cna/tRCC_72_N_hg38_sorted_picard.bam
@@ -7,13 +7,13 @@ base_file_name:
   tRCC_25_N: /mnt/scratch/qu_random/test/tRCC_25_N_hg38_sorted_picard.bam  
   tRCC_27_N: /mnt/scratch/qu_random/test/tRCC_27_N_hg38_sorted_picard.bam  
   tRCC_28_N: /mnt/scratch/qu_random/test/tRCC_28_N_hg38_sorted_picard.bam
-  tRCC_15_N: /mnt/scratch/qu_random/cna/tRCC_15_N_hg38_sorted_picard.bam
-  tRCC_58_N: /mnt/scratch/qu_random/cna/tRCC_58_N_hg38_sorted_picard.bam
-  tRCC_17_N: /mnt/scratch/qu_random/cna/tRCC_17_N_hg38_sorted_picard.bam
-  tRCC_70_N: /mnt/scratch/qu_random/cna/tRCC_70_N_hg38_sorted_picard.bam
+  #tRCC_15_N: /mnt/scratch/qu_random/cna/tRCC_15_N_hg38_sorted_picard.bam
+  #tRCC_58_N: /mnt/scratch/qu_random/cna/tRCC_58_N_hg38_sorted_picard.bam
+  #tRCC_17_N: /mnt/scratch/qu_random/cna/tRCC_17_N_hg38_sorted_picard.bam
+  #tRCC_70_N: /mnt/scratch/qu_random/cna/tRCC_70_N_hg38_sorted_picard.bam
   tRCC_26_N: /mnt/scratch/qu_random/cna/tRCC_26_N_hg38_sorted_picard.bam
   tRCC_72_N: /mnt/scratch/qu_random/cna/tRCC_72_N_hg38_sorted_picard.bam
-  tRCC_36_N: /mnt/scratch/qu_random/cna/tRCC_36_N_hg38_sorted_picard.bam
+  #tRCC_36_N: /mnt/scratch/qu_random/cna/tRCC_36_N_hg38_sorted_picard.bam
   tRCC_26_T: /mnt/scratch/qu_random/cna/tRCC_26_T_hg38_sorted_picard.bam
   tRCC_72_T: /mnt/scratch/qu_random/cna/tRCC_72_T_hg38_sorted_picard.bam
 
@@ -24,12 +24,12 @@ normals:
   tRCC_25_N: tRCC_25_N
   tRCC_27_N: tRCC_27_N
   tRCC_28_N: tRCC_28_N
-  tRCC_15_N: tRCC_15_N
-  tRCC_58_N: tRCC_58_N
-  tRCC_17_N: tRCC_17_N
-  tRCC_70_N: tRCC_70_N
+  #tRCC_15_N: tRCC_15_N
+  #tRCC_58_N: tRCC_58_N
+  #tRCC_17_N: tRCC_17_N
+  #tRCC_70_N: tRCC_70_N
   tRCC_26_N: tRCC_26_N
   tRCC_72_N: tRCC_72_N
-  tRCC_36_N: tRCC_36_N
+  #tRCC_36_N: tRCC_36_N
   tRCC_26_T: tRCC_26_T
   tRCC_72_T: tRCC_72_T
