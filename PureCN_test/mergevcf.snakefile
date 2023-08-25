@@ -8,14 +8,12 @@ rule all:
 
 
 rule MergeVcfs:
-	input:
-		tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
 	output:
 		"results/MergeVcfs/allnormalpanel.vcf.gz"
 	params:
 		java = config["java"],
 		picard_jar = config["picard_jar"],
-		normals = lambda wildcards: config["normals"][wildcards.tumor]
+		normals = config["normals"]
 	log:
 		"logs/MergeVcfs/merge_mutect_calls_all_normals.txt"
 	shell:
