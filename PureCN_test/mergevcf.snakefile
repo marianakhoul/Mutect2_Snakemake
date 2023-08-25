@@ -18,7 +18,7 @@ rule MergeVcfs:
 	shell:
 		"""
 		all_vcf_inputs=`for tum in {tumor}; do
-		printf -- "I=results/mutect2/{tumor}/unfiltered_$tum.vcf.gz "; done`
+		printf -- "I=results/mutect2/{{$tumor}}/unfiltered_$tum.vcf.gz "; done`
 	
 		({params.java} -jar {params.picard_jar} MergeVcfs \
 		$all_vcf_inputs \
