@@ -1,20 +1,25 @@
+configfile: "config/samples.yaml"
+configfile: "config/config.yaml" 
 
 
+rule all:
+	input:
+		"results/MergeVcfs/normalpanel.vcf.gz"
 
-rule GatherVcfs:
+
+rule MergeVcfs:
 	output:
-		"results/GatherVcfs/{base_file_name}/gathered_unfiltered.vcf.gz"
+		"results/MergeVcfs/normalpanel.vcf.gz"
 	params:
 		java = config["java"],
-		picard_jar = config["picard_jar"],
-		chromosomes=config["chromosomes"]
+		picard_jar = config["picard_jar"]
 	log:
 		"logs/GatherVcfs/{base_file_name}_gather_mutect_calls.txt"
 	shell:
 		"""
-		all_vcf_inputs=`for chrom in {params.chromosomes}; do
-		printf -- "I=results/mutect2/{wildcards.base_file_name}/unfiltered_$chrom.vcf.gz "; done`
+		all_vcf_inputs=`for tum in {wildcards.tumor}; do
+		printf -- "I=results/mutect2/{wildcards.tumor}/unfiltered_$tum.vcf.gz "; done`
 	
-		({params.java} -jar {params.picard_jar} GatherVcfs \
+		({params.java} -jar {params.picard_jar} MergeVcfs \
 		$all_vcf_inputs \
 		O={output}) 2> {log}"""
