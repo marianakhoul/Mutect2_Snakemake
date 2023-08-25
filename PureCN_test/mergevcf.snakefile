@@ -13,7 +13,7 @@ rule MergeVcfs:
 	params:
 		java = config["java"],
 		picard_jar = config["picard_jar"],
-		normals = config["normals"]
+		normals = expand(config["normals"])
 	log:
 		"logs/MergeVcfs/merge_mutect_calls_all_normals.txt"
 	shell:
