@@ -17,7 +17,7 @@ rule MergeVcfs:
 		"logs/MergeVcfs/merge_mutect_calls_all_normals.txt"
 	shell:
 		"""
-		all_vcf_inputs=`for tum in {tumor}; do
+		all_vcf_inputs=`for tum in {wildcards.tumor}; do
 		printf -- "I=results/mutect2/{tumor}/unfiltered_$tum.vcf.gz "; done`
 	
 		({params.java} -jar {params.picard_jar} MergeVcfs \
