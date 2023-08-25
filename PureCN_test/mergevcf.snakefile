@@ -8,18 +8,17 @@ rule all:
 
 
 rule MergeVcfs:
-	input:
-		normals=lambda wildcards: config["normals"][wildcards.tumor]
 	output:
 		"results/MergeVcfs/allnormalpanel.vcf.gz"
 	params:
 		java = config["java"],
-		picard_jar = config["picard_jar"]
+		picard_jar = config["picard_jar"],
+		normals = lambda wildcards: config["normals"][wildcards.tumor]
 	log:
 		"logs/MergeVcfs/merge_mutect_calls_all_normals.txt"
 	shell:
 		"""
-		all_vcf_inputs=`for tum in {input.normals}; do
+		all_vcf_inputs=`for tum in {params.normals}; do
 		printf -- "I=results/mutect2/$tum/unfiltered_$tum.vcf.gz "; done`
 	
 		({params.java} -jar {params.picard_jar} MergeVcfs \
