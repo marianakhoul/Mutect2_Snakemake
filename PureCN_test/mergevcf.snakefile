@@ -8,6 +8,8 @@ rule all:
 
 
 rule MergeVcfs:
+	input:
+		tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
 	output:
 		"results/MergeVcfs/allnormalpanel.vcf.gz"
 	params:
