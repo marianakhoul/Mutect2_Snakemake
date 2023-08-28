@@ -6,35 +6,35 @@ base_file_name:
   #tRCC_27_N: /mnt/scratch/qu_random/test/tRCC_27_N_hg38_sorted_picard.bam  
   tRCC_28_N: /mnt/scratch/qu_random/test/tRCC_28_N_hg38_sorted_picard.bam
   #tRCC_15_N: /mnt/scratch/qu_random/cna/tRCC_15_N_hg38_sorted_picard.bam
-  tRCC_58_N: /mnt/scratch/qu_random/cna/tRCC_58_N_hg38_sorted_picard.bam
+  #tRCC_58_N: /mnt/scratch/qu_random/cna/tRCC_58_N_hg38_sorted_picard.bam
   #tRCC_17_N: /mnt/scratch/qu_random/cna/tRCC_17_N_hg38_sorted_picard.bam
   #tRCC_70_N: /mnt/scratch/qu_random/cna/tRCC_70_N_hg38_sorted_picard.bam
-  tRCC_26_N: /mnt/scratch/qu_random/cna/tRCC_26_N_hg38_sorted_picard.bam
+  #tRCC_26_N: /mnt/scratch/qu_random/cna/tRCC_26_N_hg38_sorted_picard.bam
   #tRCC_72_N: /mnt/scratch/qu_random/cna/tRCC_72_N_hg38_sorted_picard.bam
   #tRCC_36_N: /mnt/scratch/qu_random/cna/tRCC_36_N_hg38_sorted_picard.bam
   #tRCC_26_T: /mnt/scratch/qu_random/cna/tRCC_26_T_hg38_sorted_picard.bam
   #tRCC_72_T: /mnt/scratch/qu_random/cna/tRCC_72_T_hg38_sorted_picard.bam
-  tRCC_03_N: /mnt/scratch/qu_random/male/tRCC_03_N_hg38_sorted_picard.bam
-  tRCC_55_N: /mnt/scratch/qu_random/male/tRCC_55_N_hg38_sorted_picard.bam
-  tRCC_09_N: /mnt/scratch/qu_random/male/tRCC_09_N_hg38_sorted_picard.bam
-  tRCC_59_N: /mnt/scratch/qu_random/male/tRCC_59_N_hg38_sorted_picard.bam
-  tRCC_23_N: /mnt/scratch/qu_random/male/tRCC_23_N_hg38_sorted_picard.bam
-  tRCC_75_N: /mnt/scratch/qu_random/male/tRCC_75_N_hg38_sorted_picard.bam
-  tRCC_51_N: /mnt/scratch/qu_random/male/tRCC_51_N_hg38_sorted_picard.bam
-  tRCC_81_N: /mnt/scratch/qu_random/male/tRCC_81_N_hg38_sorted_picard.bam
-  tRCC_02_N: /mnt/scratch/qu_random/female/tRCC_02_N_hg38_sorted_picard.bam
-  tRCC_29_N: /mnt/scratch/qu_random/female/tRCC_29_N_hg38_sorted_picard.bam
-  tRCC_04_N: /mnt/scratch/qu_random/female/tRCC_04_N_hg38_sorted_picard.bam
-  tRCC_50_N: /mnt/scratch/qu_random/female/tRCC_50_N_hg38_sorted_picard.bam
-  tRCC_05_N: /mnt/scratch/qu_random/female/tRCC_05_N_hg38_sorted_picard.bam  
-  tRCC_52_N: /mnt/scratch/qu_random/female/tRCC_52_N_hg38_sorted_picard.bam
-  tRCC_06_N: /mnt/scratch/qu_random/female/tRCC_06_N_hg38_sorted_picard.bam  
-  tRCC_54_N: /mnt/scratch/qu_random/female/tRCC_54_N_hg38_sorted_picard.bam
-  tRCC_20_N: /mnt/scratch/qu_random/female/tRCC_20_N_hg38_sorted_picard.bam  
-  tRCC_56_N: /mnt/scratch/qu_random/female/tRCC_56_N_hg38_sorted_picard.bam
-  tRCC_21_N: /mnt/scratch/qu_random/female/tRCC_21_N_hg38_sorted_picard.bam  
-  tRCC_57_N: /mnt/scratch/qu_random/female/tRCC_57_N_hg38_sorted_picard.bam
-  tRCC_22_N: /mnt/scratch/qu_random/female/tRCC_22_N_hg38_sorted_picard.bam  
+  #tRCC_03_N: /mnt/scratch/qu_random/male/tRCC_03_N_hg38_sorted_picard.bam
+  #tRCC_55_N: /mnt/scratch/qu_random/male/tRCC_55_N_hg38_sorted_picard.bam
+  #tRCC_09_N: /mnt/scratch/qu_random/male/tRCC_09_N_hg38_sorted_picard.bam
+  #tRCC_59_N: /mnt/scratch/qu_random/male/tRCC_59_N_hg38_sorted_picard.bam
+  #tRCC_23_N: /mnt/scratch/qu_random/male/tRCC_23_N_hg38_sorted_picard.bam
+  #tRCC_75_N: /mnt/scratch/qu_random/male/tRCC_75_N_hg38_sorted_picard.bam
+  #tRCC_51_N: /mnt/scratch/qu_random/male/tRCC_51_N_hg38_sorted_picard.bam
+  #tRCC_81_N: /mnt/scratch/qu_random/male/tRCC_81_N_hg38_sorted_picard.bam
+  #tRCC_02_N: /mnt/scratch/qu_random/female/tRCC_02_N_hg38_sorted_picard.bam
+  #tRCC_29_N: /mnt/scratch/qu_random/female/tRCC_29_N_hg38_sorted_picard.bam
+  #tRCC_04_N: /mnt/scratch/qu_random/female/tRCC_04_N_hg38_sorted_picard.bam
+  #tRCC_50_N: /mnt/scratch/qu_random/female/tRCC_50_N_hg38_sorted_picard.bam
+  #tRCC_05_N: /mnt/scratch/qu_random/female/tRCC_05_N_hg38_sorted_picard.bam  
+  #tRCC_52_N: /mnt/scratch/qu_random/female/tRCC_52_N_hg38_sorted_picard.bam
+  #tRCC_06_N: /mnt/scratch/qu_random/female/tRCC_06_N_hg38_sorted_picard.bam  
+  #tRCC_54_N: /mnt/scratch/qu_random/female/tRCC_54_N_hg38_sorted_picard.bam
+  #tRCC_20_N: /mnt/scratch/qu_random/female/tRCC_20_N_hg38_sorted_picard.bam  
+  #tRCC_56_N: /mnt/scratch/qu_random/female/tRCC_56_N_hg38_sorted_picard.bam
+  #tRCC_21_N: /mnt/scratch/qu_random/female/tRCC_21_N_hg38_sorted_picard.bam  
+  #tRCC_57_N: /mnt/scratch/qu_random/female/tRCC_57_N_hg38_sorted_picard.bam
+  #tRCC_22_N: /mnt/scratch/qu_random/female/tRCC_22_N_hg38_sorted_picard.bam  
 
 normals:
   tRCC_24_N: tRCC_24_N
@@ -42,33 +42,33 @@ normals:
   #tRCC_27_N: tRCC_27_N
   tRCC_28_N: tRCC_28_N
   #tRCC_15_N: tRCC_15_N
-  tRCC_58_N: tRCC_58_N
+  #tRCC_58_N: tRCC_58_N
   #tRCC_17_N: tRCC_17_N
   #tRCC_70_N: tRCC_70_N
-  tRCC_26_N: tRCC_26_N
+  #tRCC_26_N: tRCC_26_N
   #tRCC_72_N: tRCC_72_N
   #tRCC_36_N: tRCC_36_N
   #tRCC_26_T: tRCC_26_T
   #tRCC_72_T: tRCC_72_T
-  tRCC_03_N: tRCC_03_N
-  tRCC_55_N: tRCC_55_N
-  tRCC_09_N: tRCC_09_N
-  tRCC_59_N: tRCC_59_N
-  tRCC_23_N: tRCC_23_N
-  tRCC_75_N: tRCC_75_N
-  tRCC_51_N: tRCC_51_N
-  tRCC_81_N: tRCC_81_N
-  tRCC_02_N: tRCC_02_N
-  tRCC_29_N: tRCC_29_N
-  tRCC_04_N: tRCC_04_N
-  tRCC_50_N: tRCC_50_N
-  tRCC_05_N: tRCC_05_N
-  tRCC_52_N: tRCC_52_N
-  tRCC_06_N: tRCC_06_N
-  tRCC_54_N: tRCC_54_N
-  tRCC_20_N: tRCC_20_N
-  tRCC_56_N: tRCC_56_N
-  tRCC_21_N: tRCC_21_N
-  tRCC_57_N: tRCC_57_N
-  tRCC_22_N: tRCC_22_N
+  #tRCC_03_N: tRCC_03_N
+  #tRCC_55_N: tRCC_55_N
+  #tRCC_09_N: tRCC_09_N
+  #tRCC_59_N: tRCC_59_N
+  #tRCC_23_N: tRCC_23_N
+  #tRCC_75_N: tRCC_75_N
+  #tRCC_51_N: tRCC_51_N
+  #tRCC_81_N: tRCC_81_N
+  #tRCC_02_N: tRCC_02_N
+  #tRCC_29_N: tRCC_29_N
+  #tRCC_04_N: tRCC_04_N
+  #tRCC_50_N: tRCC_50_N
+  #tRCC_05_N: tRCC_05_N
+  #tRCC_52_N: tRCC_52_N
+  #tRCC_06_N: tRCC_06_N
+  #tRCC_54_N: tRCC_54_N
+  #tRCC_20_N: tRCC_20_N
+  #tRCC_56_N: tRCC_56_N
+  #tRCC_21_N: tRCC_21_N
+  #tRCC_57_N: tRCC_57_N
+  #tRCC_22_N: tRCC_22_N
 
