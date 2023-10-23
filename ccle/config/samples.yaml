@@ -1,8 +1,10 @@
 #samples.yaml for mutect2.snakefile
 
 base_file_name:
-  DTRCC19_kidney: /mnt/storage/labs/sviswanathan/tRCC_data/DTRCC19_kidney/v1/DTRCC19_kidney.bam
-  DTRCC19_AdjNormal: /mnt/storage/labs/sviswanathan/tRCC_data/DTRCC19_AdjNormal/v1/DTRCC19_AdjNormal.bam
-
+  ccle_786O: /mnt/storage/labs/sviswanathan/tRCC_data/trcc_wes/bam_run/ccle_786O_rg_sorted.bam
+  ccle_caki1: /mnt/storage/labs/sviswanathan/tRCC_data/trcc_wes/bam_run/ccle_caki1_rg_sorted.bam
+  
 normals:
-  DTRCC19_kidney: DTRCC19_AdjNormal
+  ccle_786O: 786O_KIDNEY
+  ccle_caki1: CAKI1_KIDNEY
+  
