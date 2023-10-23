@@ -8,7 +8,9 @@ rule all:
 		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_f1r2.tar.gz",tumor=config["normals"]),
 		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz.stats",tumor=config["normals"]),
 		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_bamout.bam",tumor=config["normals"]),
-		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_bamout.bai",tumor=config["normals"])
+		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_bamout.bai",tumor=config["normals"]),
+		expand("results/LearnReadOrientationModel/{tumor}/read_orientation_model.tar.gz",tumor=config["normals"]),
+		expand("results/GetPileupSummaries/{tumor}/pileup_summaries.table",tumor=config["normals"])
 
 rule mutect2:
 	input:
@@ -59,3 +61,47 @@ rule mutect2:
 		--bam-output {output.bam} \
 		-output {output.vcf}) 2> {log}"
 
+rule LearnReadOrientationModel:
+	input:
+		"results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_f1r2.tar.gz"
+	output:
+		"results/LearnReadOrientationModel/{tumor}/read_orientation_model.tar.gz"
+	params:
+		gatk = config["gatk_path"]
+	log:
+		"logs/LearnReadOrientationModel/{tumor}/LearnReadOrientationModel.txt"
+	shell:
+		"""
+		({params.gatk} LearnReadOrientationModel \
+		-I {input.chr1_tar} \
+		-O {output}) 2> {log}"
+		"""
+
+rule GetPileupSummaries:
+	input:
+		filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
+	output:
+		"results/GetPileupSummaries/{tumor}/pileup_summaries.table"
+	params:
+		reference_genome = config["reference_genome"],
+		gatk = config["gatk_path"],
+		variants_for_contamination = config["variants_for_contamination"],
+		intervals = config["interval_list"]
+	log:
+		"logs/GetPileupSummaries/{tumor}/GetPileupSummaries.txt"
+	shell:
+		"""
+		({params.gatk} GetPileupSummaries \
+		-R {params.reference_genome} \
+		-I {input.filepaths} \
+		-V {params.variants_for_contamination} \
+		-L {params.intervals} \
+		-O {output}) 2> {log}
+		"""
+
+rule CalculateContamination:
+	input:
+	output:
+	params:
+	log:
+	shell:
