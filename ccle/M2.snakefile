@@ -7,7 +7,6 @@ def getFullPathToFile(base, filepath):
 	print(glob.glob(''.join([filepath, base, "/", base, ".table"])))
 	return glob.glob(''.join([filepath, base, "/", base, ".table"]))
 
-
 rule all:
 	input:
 		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz",tumor=config["normals"]),
@@ -82,11 +81,9 @@ rule LearnReadOrientationModel:
 	log:
 		"logs/LearnReadOrientationModel/{tumor}/LearnReadOrientationModel.txt"
 	shell:
-		"""
-		({params.gatk} LearnReadOrientationModel \
+		"({params.gatk} LearnReadOrientationModel \
 		-I {input} \
 		-O {output}) 2> {log}"
-		"""
 
 rule GetPileupSummaries:
 	input:
@@ -112,7 +109,7 @@ rule GetPileupSummaries:
 
 rule CalculateContamination:
 	input:
-		tumor_pileup=lambda wildcards: getFullPathToFile(wildcards.tumor, "results/GatherPileupSummaries/")
+		tumor_pileup=lambda wildcards: getFullPathToFile(wildcards.tumor, "results/GetPileupSummaries/")
 	output:
 		contamination_table="results/CalculateContamination/{tumor}/{tumor}_contamination.table",
 		tumor_segmentation="results/CalculateContamination/{tumor}/{tumor}.segments.table"
