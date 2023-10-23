@@ -1,16 +1,25 @@
 configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
+rule all:
+	input:
+		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz",tumor=config["normals"]),
+		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz.tbi",tumor=config["normals"]),
+		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_f1r2.tar.gz",tumor=config["normals"]),
+		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz.stats",tumor=config["normals"]),
+		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_bamout.bam",tumor=config["normals"]),
+		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_bamout.bai",tumor=config["normals"])
+
 rule mutect2:
 	input:
 		tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
 	output:
-		vcf = temp("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz"),
-		tbi = temp("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz.tbi"),
-		tar = temp("results/mutect2/{tumor}/unfiltered_{tumor}_f1r2.tar.gz"),
-		stats = temp("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz.stats"),
-		bam = "results/mutect2/{tumor}/{tumor}_{tumor}_bamout.bam",
-		bai = "results/mutect2/{tumor}/{tumor}_{tumor}_bamout.bai"
+		vcf = "results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz",
+		tbi = "results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz.tbi",
+		tar = "results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_f1r2.tar.gz",
+		stats = "results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz.stats",
+		bam = "results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_bamout.bam",
+		bai = "results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_bamout.bai"
 	params:
 		reference_genome = config["reference_genome"],
 		germline_resource = config["germline_resource"],
