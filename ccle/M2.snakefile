@@ -104,7 +104,7 @@ rule GetPileupSummaries:
 		"""
 		({params.gatk} GetPileupSummaries \
 		-R {params.reference_genome} \
-		-I {input.filepaths} \
+		-I {input.filepath} \
 		-V {params.variants_for_contamination} \
 		-L {params.intervals} \
 		-O {output}) 2> {log}
