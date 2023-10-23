@@ -1,15 +1,6 @@
 configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
-rule all:
-	input:
-		expand("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz",tumor=config["normals"]),
-		expand("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz.tbi",tumor=config["normals"]),
-		expand("results/mutect2/{tumor}/unfiltered_{tumor}_f1r2.tar.gz",tumor=config["normals"]),
-		expand("results/mutect2/{tumor}/unfiltered_{tumor}.vcf.gz.stats",tumor=config["normals"]),
-		expand("results/mutect2/{tumor}/{tumor}_{tumor}_bamout.bai",tumor=config["normals"]),
-		expand("results/mutect2/{tumor}/{tumor}_{tumor}_bamout.bam",tumor=config["normals"])
-
 rule mutect2:
 	input:
 		tumor_filepath = lambda wildcards: config["base_file_name"][wildcards.tumor]
