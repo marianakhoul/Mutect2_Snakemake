@@ -68,9 +68,8 @@ rule CalculateContamination:
 		tumor_pileup=lambda wildcards: getFullPathToFile(wildcards.tumor, "results/GatherPileupSummaries/"),
 		normal_pileup=lambda wildcards: getFullPathToFile(config["normals"][wildcards.tumor], "results/GatherPileupSummaries/")
 	output:
-		contamination_table="results/GatherPileupSummaries/{tumor}/{tumor}_contamination.table",
-		tumor_segmentation="results/GatherPileupSummaries/{tumor}/{tumor}.segments.table"
-		
+		contamination_table="results/CalculateContamination/{tumor}/{tumor}_contamination.table",
+		tumor_segmentation="results/CalculateContamination/{tumor}/{tumor}.segments.table"
 	params:
 		gatk = config["gatk_path"]
 	log:
