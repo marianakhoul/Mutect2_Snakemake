@@ -84,7 +84,7 @@ rule LearnReadOrientationModel:
 	shell:
 		"""
 		({params.gatk} LearnReadOrientationModel \
-		-I {input.chr1_tar} \
+		-I {input} \
 		-O {output}) 2> {log}"
 		"""
 
