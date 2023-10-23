@@ -1,6 +1,13 @@
 configfile: "config/samples.yaml"
 configfile: "config/config.yaml" 
 
+import glob
+import re
+def getFullPathToFile(base, filepath):
+	print(glob.glob(''.join([filepath, base, "/", base, ".table"])))
+	return glob.glob(''.join([filepath, base, "/", base, ".table"]))
+
+
 rule all:
 	input:
 		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz",tumor=config["normals"]),
@@ -10,7 +17,11 @@ rule all:
 		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_bamout.bam",tumor=config["normals"]),
 		expand("results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait_bamout.bai",tumor=config["normals"]),
 		expand("results/LearnReadOrientationModel/{tumor}/read_orientation_model.tar.gz",tumor=config["normals"]),
-		expand("results/GetPileupSummaries/{tumor}/pileup_summaries.table",tumor=config["normals"])
+		expand("results/GetPileupSummaries/{tumor}/pileup_summaries.table",tumor=config["normals"]),
+		expand("results/CalculateContamination/{tumor}/{tumor}_contamination.table",tumor=config["normals"]),
+		expand("results/CalculateContamination/{tumor}/{tumor}.segments.table",tumor=config["normals"]),
+		expand("results/FilterMutectCalls/{tumor}/filtered_all.vcf.gz",tumor=config["normals"]),
+		expand("results/FilterMutectCalls/{tumor}/filtering_stats.tsv",tumor=config["normals"])
 
 rule mutect2:
 	input:
@@ -101,7 +112,43 @@ rule GetPileupSummaries:
 
 rule CalculateContamination:
 	input:
+		tumor_pileup=lambda wildcards: getFullPathToFile(wildcards.tumor, "results/GatherPileupSummaries/")
 	output:
+		contamination_table="results/CalculateContamination/{tumor}/{tumor}_contamination.table",
+		tumor_segmentation="results/CalculateContamination/{tumor}/{tumor}.segments.table"
 	params:
+		gatk = config["gatk_path"]
 	log:
+		"logs/CalculateContamination/{tumor}/contamination.log"
 	shell:
+		"({params.gatk} CalculateContamination \
+   		-I {input.tumor_pileup} \
+		--tumor-segmentation {output.tumor_segmentation} \
+   		-O {output.contamination_table}) 2> {log}"
+
+rule FilterMutectCalls:
+	input:
+		unfiltered_vcf = "results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz",
+		vcf_index = "results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz.tbi",
+		segments_table = "results/CalculateContamination/{tumor}/{tumor}.segments.table",
+		contamination_table = "results/CalculateContamination/{tumor}/{tumor}_contamination.table",
+		read_orientation_model = "results/LearnReadOrientationModel/{tumor}/read_orientation_model.tar.gz",
+		mutect_stats = "results/mutect2/{tumor}/{tumor}_unfiltered_ccle_params_with_bait.vcf.gz.stats"
+	output:
+		filtered_vcf = "results/FilterMutectCalls/{tumor}/filtered_all.vcf.gz",
+		filtering_stats = "results/FilterMutectCalls/{tumor}/filtering_stats.tsv"
+	params:
+		gatk = config["gatk_path"],
+		reference_genome = config["reference_genome"]
+	log:
+		"logs/FilterMutectCalls/{tumor}/FilterMutectCalls"
+	shell:
+		"({params.gatk} FilterMutectCalls \
+		-R {params.reference_genome} \
+		-V {input.unfiltered_vcf} \
+		--tumor-segmentation {input.segments_table} \
+		--contamination-table {input.contamination_table} \
+		--ob-priors {input.read_orientation_model} \
+		--stats {input.mutect_stats} \
+		--filtering-stats {output.filtering_stats} \
+		-O {output.filtered_vcf}) 2> {log}"
