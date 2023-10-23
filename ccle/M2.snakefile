@@ -152,3 +152,4 @@ rule FilterMutectCalls:
 		--stats {input.mutect_stats} \
 		--filtering-stats {output.filtering_stats} \
 		-O {output.filtered_vcf}) 2> {log}"
+
