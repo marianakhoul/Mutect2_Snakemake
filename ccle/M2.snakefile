@@ -26,7 +26,7 @@ rule mutect2:
 		gatk = config["gatk_path"],
 		panel_of_normals = config["panel_of_normals"],
 		normals = lambda wildcards: config["normals"][wildcards.tumor],
-		intervals = config["intervals"]
+		intervals = config["interval_list"]
 	log:
 		"logs/mutect2/{tumor}_mutect2.txt"
 	shell:
