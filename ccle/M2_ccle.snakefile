@@ -1,5 +1,5 @@
-configfile: "config/samples.yaml"
-configfile: "config/config.yaml" 
+configfile: "config/samples_ccle.yaml"
+configfile: "config/config_ccle.yaml"
 
 rule all:
 	input:
