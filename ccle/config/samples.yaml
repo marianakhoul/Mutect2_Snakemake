@@ -5,9 +5,13 @@ base_file_name:
   ccle_caki1: /mnt/storage/labs/sviswanathan/tRCC_data/trcc_wes/bam_run/ccle_caki1_rg_sorted.bam
   A1_CKDN230014512: /mnt/storage/labs/sviswanathan/tRCC_data/trcc_wes/bam_run/cleaned_bams/A1_CKDN230014512_rg_sorted.bam
   A3_CKDN230014514: /mnt/storage/labs/sviswanathan/tRCC_data/trcc_wes/bam_run/cleaned_bams/A3_CKDN230014514_rg_sorted.bam
+  A2_CKDN230014513: /mnt/storage/labs/sviswanathan/tRCC_data/trcc_wes/bam_run/cleaned_bams/A2_CKDN230014513_rg_sorted.bam
+  A4_CKDN230014515: /mnt/storage/labs/sviswanathan/tRCC_data/trcc_wes/bam_run/cleaned_bams/A4_CKDN230014515_rg_sorted.bam
   
 normals:
   ccle_786O: 786O_KIDNEY
   ccle_caki1: CAKI1_KIDNEY
   A1_CKDN230014512: A1_CKDN230014512
   A3_CKDN230014514: A3_CKDN230014514
+  A2_CKDN230014513: A2_CKDN230014513
+  A4_CKDN230014515: A4_CKDN230014515
